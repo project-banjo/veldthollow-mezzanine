@@ -1,0 +1,11 @@
+{% load custom_tags %}
+{% blog_keywords as keywords %}
+{% if keywords %}
+<div class="keywords">
+    {% for keyword in keywords %}
+    <div class="keyword">
+        <a href="{% url "blog_post_list_tag" keyword.slug %}">#{{ keyword }}</a>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

@@ -1,0 +1,9 @@
+{% overextends "admin/change_form.html" %}
+
+{% block stylesheets %}
+{{block.super}}
+<style>
+.cke_chrome{display: inline-block !important}
+.cke_dialog input[type=text], .cke_dialog input[type=password]{height: auto;}}
+</style>
+{% endblock %}
