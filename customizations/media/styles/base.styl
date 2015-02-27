@@ -1,0 +1,77 @@
+/* Site */
+body
+    font-size: 18px
+
+a,
+a:visited
+    text-decoration: none
+
+
+a:hover,
+a:active,
+a:focus
+    text-decoration: none
+
+
+/* Layout */
+
+header
+    background-color: rgba(0, 0, 0, 0.3)
+
+     .container
+        padding: 20px 20px 5px
+        position: relative
+
+    #title
+        height: 70px
+        width: 230px
+        background-image: url("http://lorempixel.com/g/230/70/nature/")
+        text-indent: -9999em
+        margin: 10px auto 20px
+        text-align: center
+
+    nav
+        text-align: center
+
+        .navbar-nav
+            display: flex
+            width: 100%
+            justify-content: space-around
+
+            @media (max-width: 768px)
+                justify-content: center
+                flex-flow: row wrap
+
+    .social-icons
+        display: block
+        position: absolute
+        top: 0
+        right: 0
+        margin-right: 30px
+        padding: 10px 0
+        font-size: 18px
+
+footer
+    background-color: rgba(0, 0, 0, 0.3)
+    padding: 30px 0
+
+    .row
+        display: flex
+        flex-flow: row wrap
+        justify-content: center
+        align-items: stretch
+
+    .branding
+        display: flex
+        flex-direction: column
+        justify-content: space-around
+
+        .logo
+            text-align: center
+
+        .copyright
+            align-self: bottom
+
+    ul
+        list-style: none
+        padding-left: 0

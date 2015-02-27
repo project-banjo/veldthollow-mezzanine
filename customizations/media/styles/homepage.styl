@@ -1,0 +1,68 @@
+#homepage
+    .article-group
+        padding: 20px
+
+        h2
+            text-align: center
+            margin: 0 0 20px
+            vertical-align: middle
+
+            small
+                vertical-align: middle
+                font-style: italic
+
+        &:nth-child(even)
+            background-color: rgba(0, 0, 0, 0.3)
+
+    .article-summary
+        img
+            width: 100%
+
+        .preview-blurb
+            font-size: 2em
+            text-align: center
+            height: 330px
+            display: flex
+            align-items: center
+
+    #latest-stories
+
+        .article-summary
+            position: relative
+            overflow: hidden
+            margin-bottom: 20px
+
+            .details
+                background: rgba(255, 255, 255, 0.7)
+                position: absolute
+                bottom: -145px
+                padding: 0 20px
+                transition: bottom .5s ease-out
+                width: 100%
+                width: calc(100% - 30px)
+
+                @media (max-width: 768px)
+                    position: relative
+                    bottom: 0
+
+            &:hover .details
+                bottom: 0
+
+            .byline
+                margin: 10px 0
+
+            .category
+                 font-style: italic
+
+            .author
+                color: rgb(120, 120, 120)
+
+    #featured-author
+        .author img
+            width: 100%
+            border-radius: 50%
+
+    .load-more
+        margin: 30px auto
+        padding: 10px
+        width: 100%
