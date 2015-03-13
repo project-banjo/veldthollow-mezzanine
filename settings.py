@@ -17,7 +17,7 @@ ADMIN_MENU_ORDER = (
     ("Content", ("pages.Page", "blog.BlogPost", "blog.BlogCategory",
        ("Media Library", "fb_browse"),)),
     ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
-    ("Users", ("auth.User", "auth.Group",)),
+    ("Users", ("customizations.User", "auth.Group",)),
 )
 
 # A three item sequence, each containing a sequence of template tags
@@ -306,6 +306,8 @@ MIDDLEWARE_CLASSES = (
 # at the moment we are using custom forks of them.
 PACKAGE_NAME_FILEBROWSER = "filebrowser_safe"
 PACKAGE_NAME_GRAPPELLI = "grappelli_safe"
+
+AUTH_USER_MODEL = 'customizations.User'
 
 #########################
 # OPTIONAL APPLICATIONS #
