@@ -335,26 +335,26 @@ CKEDITOR_CONFIGS = {
         'toolbar': None,
         'skin': 'moonocolor',
         'toolbarGroups': [
-            { 'name': 'styles' },
-            { 'name': 'basicstyles', 'groups': [ 'basicstyles', 'cleanup' ] },
-            { 'name': 'paragraph',   'groups': [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-            { 'name': 'insert' },
+            {'name': 'styles'},
+            {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup']},
+            {'name': 'paragraph',   'groups': ['list', 'indent', 'blocks', 'align', 'bidi']},
+            {'name': 'insert'},
             '/',
-            { 'name': 'clipboard',   'groups': [ 'clipboard', 'undo' ] },
-            { 'name': 'editing',     'groups': [ 'find', 'selection', 'spellchecker' ] },
-            { 'name': 'links' },
-            { 'name': 'forms' },
-            { 'name': 'tools' },
-            { 'name': 'documet',     'groups': [ 'mode', 'document', 'doctools' ] },
-            { 'name': 'others' },
-            { 'name': 'colors' },
-            { 'name': 'about' }
+            {'name': 'clipboard',   'groups': ['clipboard', 'undo']},
+            {'name': 'editing',     'groups': ['find', 'selection', 'spellchecker']},
+            {'name': 'links'},
+            {'name': 'forms'},
+            {'name': 'tools'},
+            {'name': 'documet',     'groups': ['mode', 'document', 'doctools']},
+            {'name': 'others'},
+            {'name': 'colors'},
+            {'name': 'about'}
         ],
         'extraAllowedContent': {
             'pre code nav ul ol li abbr': {
                 'classes': '*'
             },
-            'h1 h2 h3 h4 h5 h6':{
+            'h1 h2 h3 h4 h5 h6': {
                 'attributes': 'id'
             },
             'style script': {},
