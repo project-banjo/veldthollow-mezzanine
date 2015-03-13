@@ -90,7 +90,7 @@
     <aside class="col-md-4">
         {% include "includes/social-icons.html" %}
         {% block blog_post_detail_related_posts %}
-        {% editable blog_post.related_posts %}
+        {#% editable blog_post.related_posts %#}
         {% if blog_post.related_posts.published %}
         <div id="related-posts">
             {% for post in blog_post.related_posts.published %}
@@ -102,7 +102,7 @@
         </div>
         {% endif %}
         {% include "includes/keyword_sidebar.html" %}
-        {% endeditable %}
+        {#% endeditable %#}
         {% endblock %}
     </aside>
 </div>
