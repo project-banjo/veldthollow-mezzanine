@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import mezzanine.core.fields
+import customizations.fields
 
 
 class Migration(migrations.Migration):
@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='user',
             name='profile_image',
-            field=mezzanine.core.fields.FileField(max_length=255, null=True, blank=True),
+            field=customizations.fields.FileBrowseImageField(max_length=255, null=True, blank=True),
             preserve_default=True,
         ),
     ]

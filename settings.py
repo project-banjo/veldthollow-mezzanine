@@ -236,6 +236,9 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 BLOG_SLUG = ""
 PAGES_SLUG = ""
 
+IMAGEKIT_SPEC_CACHEFILE_NAMER = 'imagekit.cachefiles.namers.source_name_dot_hash'
+IMAGEKIT_CACHEFILE_DIR = 'specs'
+
 ################
 # APPLICATIONS #
 ################
