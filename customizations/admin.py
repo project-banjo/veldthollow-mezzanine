@@ -4,7 +4,7 @@ from mezzanine.core.admin import SitePermissionUserAdmin
 from mezzanine.blog.admin import BlogCategoryAdmin, BlogPostAdmin
 from mezzanine.blog.models import BlogCategory, BlogPost
 
-from .models import User
+from .models import User, AuthorLink
 
 
 class CustomBlogPostAdmin(BlogPostAdmin):
@@ -43,14 +43,22 @@ class CustomUserChangeForm(UserChangeForm):
         model = User
 
 
+class AuthorLinkAdmin(admin.TabularInline):
+    model = AuthorLink
+
+
 class CustomUserAdmin(SitePermissionUserAdmin):
     form = CustomUserChangeForm
     fieldsets = (
-        (None, {
-            'fields': ('username', 'password'),
-        }),
         ('Personal Info', {
             'fields': ('first_name', 'last_name', 'email', 'profile_image'),
+        }),
+        ('Bio', {
+            'fields': ('short_bio', 'full_bio'),
+        }),
+        ('Login Info', {
+            'fields': ('username', 'password'),
+            "classes": ("collapse-closed",),
         }),
         ('Permissions', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups',
@@ -61,6 +69,7 @@ class CustomUserAdmin(SitePermissionUserAdmin):
             'fields': ('last_login', 'date_joined'),
             "classes": ("collapse-closed",),
         }))
+    inlines = (AuthorLinkAdmin,)
 
 
 admin.site.register(User, CustomUserAdmin)
