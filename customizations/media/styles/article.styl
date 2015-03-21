@@ -1,0 +1,47 @@
+@require 'variables.styl'
+#article_page
+    
+    header
+        text-align: center
+
+    .categories,
+    .author,
+    .tags,
+    .author-bio,
+    .post p:not(.embed)
+            margin-left: 80px
+
+    .post
+        .embed img
+            width: 100%
+
+        blockquote
+            padding-left: 0
+            margin-left: 120px
+
+            p:not(.embed)
+                margin-left: 20px;
+
+        .tags li>a:before
+            content: '#'
+
+    .author-bio
+        background-color: lightGray
+        display: flex
+        align-items: center
+
+        margin-top: 20px
+        margin-bottom: 20px
+        padding: 20px
+
+        img
+            border-radius: 50%
+
+        figure
+            text-align: center
+
+        .bio
+            font-size: .8em
+
+    .comments
+        background-color: lightGray

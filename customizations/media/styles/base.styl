@@ -1,3 +1,5 @@
+@require 'variables.styl'
+
 /* Site */
 body
     font-size: 18px
@@ -15,10 +17,10 @@ a:focus
 
 /* Layout */
 
-header
-    background-color: rgba(0, 0, 0, 0.3)
+body > header
+    background-color: midGray
 
-     .container
+    .container
         padding: 20px 20px 5px
         position: relative
 
@@ -51,8 +53,8 @@ header
         padding: 10px 0
         font-size: 18px
 
-footer
-    background-color: rgba(0, 0, 0, 0.3)
+body > footer
+    background-color: midGray
     padding: 30px 0
 
     .row

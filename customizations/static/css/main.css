@@ -1,3 +1,47 @@
+#article_page header {
+  text-align: center;
+}
+#article_page .categories,
+#article_page .author,
+#article_page .tags,
+#article_page .author-bio,
+#article_page .post p:not(.embed) {
+  margin-left: 80px;
+}
+#article_page .post .embed img {
+  width: 100%;
+}
+#article_page .post blockquote {
+  padding-left: 0;
+  margin-left: 120px;
+}
+#article_page .post blockquote p:not(.embed) {
+  margin-left: 20px;
+}
+#article_page .post .tags li>a:before {
+  content: '#';
+}
+#article_page .author-bio {
+  background-color: rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+#article_page .author-bio img {
+  border-radius: 50%;
+}
+#article_page .author-bio figure {
+  text-align: center;
+}
+#article_page .author-bio .bio {
+  font-size: 0.8em;
+}
+#article_page .comments {
+  background-color: rgba(0,0,0,0.1);
+}
+
 /* Site */
 body {
   font-size: 18px;
@@ -12,14 +56,14 @@ a:focus {
   text-decoration: none;
 }
 /* Layout */
-header {
+body > header {
   background-color: rgba(0,0,0,0.3);
 }
-header .container {
+body > header .container {
   padding: 20px 20px 5px;
   position: relative;
 }
-#title {
+body > header #title {
   height: 70px;
   width: 230px;
   background-image: url("http://lorempixel.com/g/230/70/nature/");
@@ -27,21 +71,21 @@ header .container {
   margin: 10px auto 20px;
   text-align: center;
 }
-nav {
+body > header nav {
   text-align: center;
 }
-nav .navbar-nav {
+body > header nav .navbar-nav {
   display: flex;
   width: 100%;
   justify-content: space-around;
 }
 @media (max-width: 768px) {
-  nav .navbar-nav {
+  body > header nav .navbar-nav {
     justify-content: center;
     flex-flow: row wrap;
   }
 }
-.social-icons {
+body > header .social-icons {
   display: block;
   position: absolute;
   top: 0;
@@ -50,28 +94,28 @@ nav .navbar-nav {
   padding: 10px 0;
   font-size: 18px;
 }
-footer {
+body > footer {
   background-color: rgba(0,0,0,0.3);
   padding: 30px 0;
 }
-footer .row {
+body > footer .row {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: stretch;
 }
-footer .branding {
+body > footer .branding {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-footer .branding .logo {
+body > footer .branding .logo {
   text-align: center;
 }
-footer .branding .copyright {
+body > footer .branding .copyright {
   align-self: bottom;
 }
-footer ul {
+body > footer ul {
   list-style: none;
   padding-left: 0;
 }
@@ -156,3 +200,4 @@ footer ul {
   padding: 10px;
   width: 100%;
 }
+
