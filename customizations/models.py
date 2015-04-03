@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from imagekit.models import ImageSpecField
 from imagekit.processors import SmartResize
 from mezzanine.core.fields import RichTextField
@@ -11,7 +12,9 @@ from mezzanine.utils.models import upload_to
 from .fields import FileBrowseImageField
 
 
+@python_2_unicode_compatible
 class User(AbstractUser):
+    is_author = models.BooleanField('author status', default=False)
     short_bio = RichTextField(blank=True)
     full_bio = RichTextField(blank=True)
     profile_image = FileBrowseImageField(
@@ -26,6 +29,9 @@ class User(AbstractUser):
 
     class Meta:
         db_table = 'auth_user'
+
+    def __str__(self):
+        return self.get_full_name() or self.username
 
 
 class AuthorLink(models.Model):
