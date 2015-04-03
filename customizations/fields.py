@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.core.files.storage import default_storage
 from django.db import models
 from django.utils.six import with_metaclass
@@ -16,9 +18,10 @@ class FileBrowseImageField(with_metaclass(models.SubfieldBase, FileField)):
             self.target_field = target_field
 
         def __get__(self, instance=None, owner=None):
-            name = instance.__dict__[self.target_field.name].name
-            return models.fields.files.FieldFile(
-                instance, self.target_field, name)
+            source = getattr(instance, self.target_field.name)
+            if source:
+                return models.fields.files.FieldFile(
+                    instance, self.target_field, source.name)
 
     def __init__(self, file_obj_name='image_file', *args, **kwargs):
         self.storage = kwargs.pop('storage', None) or default_storage
