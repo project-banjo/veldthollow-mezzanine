@@ -1,0 +1,5 @@
+model-mommy
+fudge
+django-nose
+nose-progressive
+django-test-utilities

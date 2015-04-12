@@ -7,6 +7,8 @@ from django.contrib import admin
 from mezzanine.conf import settings
 from mezzanine.core.views import direct_to_template
 
+from customizations.views import HomepageView
+
 
 admin.autodiscover()
 
@@ -61,6 +63,8 @@ urlpatterns += patterns('',
     # page tree in the admin if it was installed.
 
     #url("^$", "mezzanine.blog.views.blog_post_list", name="home"),
+
+    url('^homepage$', HomepageView.as_view()),
 
     # MEZZANINE'S URLS
     # ----------------

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load mezzanine_tags %}
+{% block body_id %}homepage{% endblock %}
+{% block main %}
+<section class="article-group">
+    <div class="container">
+        <section id="latest-stories" class="row">
+            <h2 class="col-md-12">Latest Stories</h2>
+            {% for article in latest_articles %}
+            <div class="article-summary col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0">
+                {% if forloop.first %}
+                <img src="{{MEDIA_URL}}{% thumbnail article.featured_image 705 640 %}" />
+                {% else %}
+                <img src="{{MEDIA_URL}}{% thumbnail article.featured_image 705 310 %}" />
+                {% endif %}
+                <div class="details">
+                    <h3>{{article.title}}</h3>
+                    <div class="blurb">{{article.blurb}}</div>
+                    <div class="byline">
+                        <span class="category">{{article.category_list.0}}</span>
+                        <span class="author">by {{article.user.get_full_name}}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+</section>
+<section class="article-group">
+    <div class="container">
+        <section id="featured-category " class="row">
+            <h2 class="col-md-12">Featured | <small><span class="category">{{object.featured_category.title}}</span></small></h2>
+            {% for article in featured_category_articles %}
+            <div class="article-summary col-sm-4">
+                <img src="{{MEDIA_URL}}{% thumbnail article.featured_image 705 640 %}" />
+                <h4>{{article.title}}</h4>
+                <div class="author">by {{article.user.get_full_name}}</div>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+</section>
+<section class="article-group">
+    <div class="container">
+        <section id="featured-category " class="row">
+            <h2 class="col-md-12">Featured Stories</h2>
+            {% for article in featured_articles %}
+            <div class="article-summary col-sm-4">
+                <img src="{{MEDIA_URL}}{% thumbnail article.featured_image 705 640 %}" />
+                <span class="category">
+                    {% for category in article.categories.all %}
+                    {{category.title}} {% if not forloop.last %}|{% endif %}
+                    {% endfor %}
+                </span>
+                <h4>{{article.title}}</h4>
+                <div class="author">by {{article.user.get_full_name}}</div>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+</section>
+<section class="article-group">
+    <div class="container">
+        <section id="featured-author" class="row">
+            {% with author=object.featured_author %}
+            <h2 class="col-md-12">Featured Author | <small><span class="author">by {{author.get_full_name}}</span></small></h2>
+            <div class="author col-sm-6 col-sm-offset-3 col-md-3 col-md-offset-0">
+                <img src="{{MEDIA_URL}}{% thumbnail author.profile_image 705 705 %}" />
+                <div class="bio">{{author.short_bio}}</div>
+            </div>
+            {% endwith %}
+            {% for article in featured_author_articles %}
+            <div class="article-summary col-sm-4 col-md-3">
+                <img src="{{MEDIA_URL}}{% thumbnail article.featured_image 705 705 %}" />
+                <h4>{{article.title}}</h4>
+                <div class="author">by {{article.author.get_full_name}}</div>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+</section>
+<section class="article-group">
+    <div class="container">
+        <section id="featured-category " class="row">
+            <div class="article-summary col-sm-4">
+                <img src="http://lorempixel.com/g/360/330/nature/5/" />
+                <span class="category">Nourishment</span>
+                <h4>Title of article will go here and here and here and here</h4>
+                <div class="author">by Indiana</div>
+            </div>
+            <div class="article-summary col-sm-4">
+                <div class="preview-blurb">Every once in a while we will have a title that won't have a picture.  Like this one.</div>
+                <span class="category">Long Play</span>
+                <h4>Title of article will go here and here and here and here</h4>
+                <div class="author">by Wyoming</div>
+            </div>
+            <div class="article-summary col-sm-4">
+                <img src="http://lorempixel.com/g/360/330/nature/2/" />
+                <span class="category">Big Skies</span>
+                <h4>Title of article will go here and here and here and here</h4>
+                <div class="author">by Colorado</div>
+            </div>
+        </section>
+    </div>
+</section>
+<section class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <div class="load-more btn btn-primary">Load More</div>
+        </div>
+    </div>
+</section>
+
+{% endblock main %}
+

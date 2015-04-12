@@ -278,6 +278,7 @@ INSTALLED_APPS = (
 
     'customizations',
     'ckeditor',
+    'django_nose',
 )
 
 # List of processors used by RequestContext to populate the context.
@@ -325,6 +326,15 @@ PACKAGE_NAME_FILEBROWSER = "filebrowser_safe"
 PACKAGE_NAME_GRAPPELLI = "grappelli_safe"
 
 AUTH_USER_MODEL = 'customizations.User'
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ('--nocapture', '--nologcapture', '--with-progressive',)
+
+from model_mommy import generators
+MOMMY_CUSTOM_FIELDS_GEN = {
+    'mezzanine.core.fields.RichTextField': generators.gen_text,
+}
+
 
 #########################
 # OPTIONAL APPLICATIONS #
