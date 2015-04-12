@@ -29,7 +29,7 @@ class CustomBlogPostAdmin(BlogPostAdmin):
         ('Login Details', {
             "fields": ["title", "user", "categories", "status",
                        ("publish_date", "expiry_date"), "featured_image",
-                       "content", "allow_comments"],
+                       "content", "blurb", "featured", "allow_comments"],
         }),
         ("Other posts", {
             "fields": ("related_posts",),

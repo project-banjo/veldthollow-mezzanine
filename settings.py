@@ -51,8 +51,20 @@ PAGE_MENU_TEMPLATES = (
 # field instance. When specifying the field class, the path
 # ``django.models.db.`` can be omitted for regular Django model fields.
 #
-# EXTRA_MODEL_FIELDS = (
-#     (
+EXTRA_MODEL_FIELDS = (
+    ('mezzanine.blog.models.BlogPost.blurb',
+     'django.db.models.CharField',
+     ('Blurb',),
+     {'max_length': 250}),
+    ('mezzanine.blog.models.BlogPost.featured',
+     'django.db.models.BooleanField',
+     (),
+     {
+         'default': False,
+         'help_text': 'Will appear in the Featured Stories section of the '
+                      'homepage.',
+     }),
+)
 #         # Dotted path to field.
 #         "mezzanine.blog.models.BlogPost.image",
 #         # Dotted path to field class.
