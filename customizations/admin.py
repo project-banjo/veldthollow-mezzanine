@@ -8,7 +8,7 @@ from mezzanine.blog.admin import BlogCategoryAdmin, BlogPostAdmin
 from mezzanine.core.admin import SitePermissionUserAdmin
 from mezzanine.blog.models import BlogCategory, BlogPost
 
-from .models import User, AuthorLink
+from .models import User, AuthorLink, Homepage
 
 
 class BlogPostAdminForm(forms.ModelForm):
@@ -91,3 +91,4 @@ class CustomUserAdmin(SitePermissionUserAdmin):
 
 
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(Homepage)
