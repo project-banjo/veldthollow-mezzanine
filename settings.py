@@ -336,6 +336,36 @@ MOMMY_CUSTOM_FIELDS_GEN = {
 }
 
 
+# LOGGING
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {'format': '%(levelname)s: %(message)s'}
+    },
+    'handlers': {
+        'console': {
+            'level': 'ERROR',
+            # 'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+        '': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True
+        },
+    }
+}
+
 #########################
 # OPTIONAL APPLICATIONS #
 #########################
