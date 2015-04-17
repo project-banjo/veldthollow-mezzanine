@@ -15,7 +15,7 @@ from __future__ import absolute_import, unicode_literals
 #
 ADMIN_MENU_ORDER = (
     ("Content", ("pages.Page", "blog.BlogPost", "blog.BlogCategory",
-       ("Media Library", "fb_browse"),)),
+                 ("Media Library", "fb_browse"),)),
     ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
     ("Users", ("customizations.User", "auth.Group",)),
 )
@@ -38,7 +38,7 @@ ADMIN_MENU_ORDER = (
 
 PAGE_MENU_TEMPLATES = (
     (1, "Top navigation bar", "pages/menus/dropdown.html"),
-    #(2, "Left-hand tree", "pages/menus/tree.html"),
+    # (2, "Left-hand tree", "pages/menus/tree.html"),
     (3, "Footer", "pages/menus/footer.html"),
 )
 
@@ -86,10 +86,6 @@ EXTRA_MODEL_FIELDS = (
 # Setting to turn on featured images for blog posts. Defaults to False.
 #
 BLOG_USE_FEATURED_IMAGE = True
-
-# If True, the south application will be automatically added to the
-# INSTALLED_APPS setting.
-#USE_SOUTH = True
 
 
 ########################
@@ -234,7 +230,7 @@ MEDIA_URL = "/media/"
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT,'media') 
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_DIRNAME
@@ -272,9 +268,6 @@ INSTALLED_APPS = (
     "mezzanine.forms",
     "mezzanine.pages",
     "mezzanine.galleries",
-    #"mezzanine.twitter",
-    #"mezzanine.accounts",
-    #"mezzanine.mobile",
 
     'customizations',
     'ckeditor',
@@ -380,7 +373,6 @@ OPTIONAL_APPS = (
 )
 
 DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
-#TINYMCE_SETUP_JS = 'js/tinymce_setup.js'
 RICHTEXT_WIDGET_CLASS = 'customizations.widgets.CustomCKEditorWidget'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_SOURCE = STATIC_URL + 'js/ckeditor/ckeditor.js'
@@ -391,22 +383,27 @@ CKEDITOR_CONFIGS = {
         'skin': 'moonocolor',
         'toolbarGroups': [
             {'name': 'styles'},
-            {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup']},
-            {'name': 'paragraph',   'groups': ['list', 'indent', 'blocks', 'align', 'bidi']},
+            {'name': 'basicstyles',
+             'groups': ['basicstyles', 'cleanup']},
+            {'name': 'paragraph',
+             'groups': ['list', 'indent', 'blocks', 'align', 'bidi']},
             {'name': 'insert'},
             '/',
-            {'name': 'clipboard',   'groups': ['clipboard', 'undo']},
-            {'name': 'editing',     'groups': ['find', 'selection', 'spellchecker']},
+            {'name': 'clipboard',
+             'groups': ['clipboard', 'undo']},
+            {'name': 'editing',
+             'groups': ['find', 'selection', 'spellchecker']},
             {'name': 'links'},
             {'name': 'forms'},
             {'name': 'tools'},
-            {'name': 'documet',     'groups': ['mode', 'document', 'doctools']},
+            {'name': 'document',
+             'groups': ['mode', 'document', 'doctools']},
             {'name': 'others'},
             {'name': 'colors'},
             {'name': 'about'}
         ],
         'extraAllowedContent': {
-            'pre code nav ul ol li abbr': {
+            'p pre code nav ul ol li abbr': {
                 'classes': '*'
             },
             'h1 h2 h3 h4 h5 h6': {
