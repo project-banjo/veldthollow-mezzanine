@@ -419,6 +419,8 @@ CKEDITOR_CONFIGS = {
             STATIC_URL + 'css/bootstrap.min.css',
             STATIC_URL + 'css/main.css',
         ),
+        'autosave_saveDetectionSelectors': (
+            'div[class="submit-row"] input, a[class="deleteLink"]'),
     }
 }
 
