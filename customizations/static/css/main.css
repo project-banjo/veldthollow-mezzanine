@@ -120,6 +120,13 @@ body > footer ul {
   padding-left: 0;
 }
 
+#page_blog_list h1 {
+  text-align: center;
+}
+#page_blog_list .post {
+  text-align: center;
+}
+
 /* CKEditor style fixes */
 .cke_panel_container body,
 .cke_editable {
