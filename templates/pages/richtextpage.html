@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load mezzanine_tags %}
+{% block main %}
+<div class="container">
+    <div class="row">
+        <article class="col-md-12">
+            {% editable page.richtextpage.title page.richtextpage.content %}
+            <h1>
+                {{page.richtextpage.title}}
+            </h1>
+            {{ page.richtextpage.content|richtext_filters|safe }}
+            {% endeditable %}
+        </article>
+    </div>
+</div>
+{% endblock %}
+
