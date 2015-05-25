@@ -48,7 +48,7 @@ admin.site.register(BlogPost, CustomBlogPostAdmin)
 
 
 class CustomBlogCategoryAdmin(BlogCategoryAdmin):
-    fieldsets = ((None, {"fields": ("title",)}),)
+    fieldsets = ((None, {"fields": ("slug", "title")}),)
 
 
 admin.site.unregister(BlogCategory)

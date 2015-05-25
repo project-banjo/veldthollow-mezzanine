@@ -31,12 +31,9 @@
                     <nav class="col-md-12">
                         {#% page_menu "pages/menus/dropdown.html" %#}
                         <ul class="nav navbar-nav">
-                            <li><a href="#">The Sovereign</a></li>
-                            <li><a href="#">Big Skies</a></li>
-                            <li><a href="#">Larder & Libations</a></li>
-                            <li><a href="#">Long Play</a></li>
-                            <li><a href="#">The Rough Hand</a></li>
-                            <li><a href="#">Nourishment</a></li>
+                            {% for category in categories %}
+                            <li><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>
+                            {% endfor %}
                         </ul>
                     </nav>
                     {% include "includes/social-icons.html" %}
@@ -58,24 +55,13 @@
                     <div class="col-md-2">
                         <h4>Categories</h4>
                         <ul>
-                            <li><a href="#">The Sovereign</a></li>
-                            <li><a href="#">Big Skies</a></li>
-                            <li><a href="#">Larder & Libations</a></li>
-                            <li><a href="#">Long Play</a></li>
-                            <li><a href="#">The Rough Hand</a></li>
-                            <li><a href="#">Nourishment</a></li>
+                            {% for category in categories %}
+                            <li><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="col-md-2">
-                        <h4>Categories</h4>
-                        <ul>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Comments</a></li>
-                            <li><a href="#">Authors</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                            <li><a href="#">Terms of use</a></li>
-                            <li><a href="#">Advertising</a></li>
-                        </ul>
+                        {% page_menu "menus/footer.html" %}
                     </div>
                     <div class="col-md-2">
                         <h4>Connect With Us</h4>

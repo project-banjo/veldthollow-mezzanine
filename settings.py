@@ -37,10 +37,11 @@ ADMIN_MENU_ORDER = (
 # that doesn't appear in this setting, all pages will appear in it.
 
 PAGE_MENU_TEMPLATES = (
-    (1, "Top navigation bar", "pages/menus/dropdown.html"),
+    # (1, "Top navigation bar", "pages/menus/dropdown.html"),
     # (2, "Left-hand tree", "pages/menus/tree.html"),
-    (3, "Footer", "pages/menus/footer.html"),
+    (3, "Footer", "menus/footer.html"),
 )
+PAGE_MENU_TEMPLATES_DEFAULT = ()
 
 # A sequence of fields that will be injected into Mezzanine's (or any
 # library's) models. Each item in the sequence is a four item sequence.
@@ -288,6 +289,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "mezzanine.conf.context_processors.settings",
     "mezzanine.pages.context_processors.page",
+    "customizations.context_processors.categories",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
