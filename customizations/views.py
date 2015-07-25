@@ -1,7 +1,24 @@
-from django.views.generic import DetailView
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.http import Http404
+from django.views.generic import DetailView, View
+from mezzanine.blog import views as blog_views
 from mezzanine.blog.models import BlogPost
 
 from customizations.models import Homepage
+
+
+class BlogRouterView(View):
+    def get(self, request, *args, **kwargs):
+        slug = kwargs.pop('slug')
+        try:
+            response = blog_views.blog_post_list(
+                request, category=slug, *args, **kwargs)
+        except Http404:
+            response = blog_views.blog_post_detail(
+                request, slug=slug, *args, **kwargs)
+        return response
 
 
 class HomepageView(DetailView):
