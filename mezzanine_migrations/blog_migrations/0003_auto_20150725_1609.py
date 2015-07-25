@@ -7,20 +7,18 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0001_initial'),
+        ('blog', '0002_auto_20150725_1603'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='blogpost',
             name='blurb',
-            field=models.CharField(default='Feed me.', max_length=250, verbose_name='Blurb'),
-            preserve_default=False,
+            field=models.CharField(max_length=250, verbose_name='Blurb', blank=True),
         ),
         migrations.AddField(
             model_name='blogpost',
             name='featured',
-            field=models.BooleanField(default=False),
-            preserve_default=True,
+            field=models.BooleanField(default=False, help_text='Will appear in the Featured Stories section of the homepage.'),
         ),
     ]

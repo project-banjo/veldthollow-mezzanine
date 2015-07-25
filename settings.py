@@ -56,7 +56,11 @@ EXTRA_MODEL_FIELDS = (
     ('mezzanine.blog.models.BlogPost.blurb',
      'django.db.models.CharField',
      ('Blurb',),
-     {'max_length': 250}),
+     {
+         'max_length': 250,
+         'blank': True,
+     }),
+
     ('mezzanine.blog.models.BlogPost.featured',
      'django.db.models.BooleanField',
      (),
@@ -189,12 +193,6 @@ DATABASES = {
 
 MIGRATION_MODULES = {
     'blog': 'veldthollow-mezzanine.mezzanine_migrations.blog_migrations',
-    'conf': 'veldthollow-mezzanine.mezzanine_migrations.conf_migrations',
-    'core': 'veldthollow-mezzanine.mezzanine_migrations.core_migrations',
-    'forms': 'veldthollow-mezzanine.mezzanine_migrations.form_migrations',
-    'galleries': 'veldthollow-mezzanine.mezzanine_migrations.galleries_migrations',
-    'generic': 'veldthollow-mezzanine.mezzanine_migrations.generic_migrations',
-    'pages': 'veldthollow-mezzanine.mezzanine_migrations.pages_migrations',
 }
 
 #########

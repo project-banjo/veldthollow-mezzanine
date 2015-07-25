@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django import forms
 from django.contrib import admin
 from django.contrib.auth.forms import UserChangeForm
 from mezzanine.blog.admin import BlogCategoryAdmin, BlogPostAdmin
@@ -11,20 +10,7 @@ from mezzanine.blog.models import BlogCategory, BlogPost
 from .models import User, AuthorLink, Homepage
 
 
-class BlogPostAdminForm(forms.ModelForm):
-    class Meta:
-        model = BlogPost
-
-    def __init__(self, *args, **kwargs):
-        super(BlogPostAdminForm, self).__init__(*args, **kwargs)
-        self.fields['user'].choices = (
-            [(u'', u'---------')] +
-            [(u.pk, u) for u in User.objects.filter(
-                is_author=True).iterator()])
-
-
 class CustomBlogPostAdmin(BlogPostAdmin):
-    form = BlogPostAdminForm
     fieldsets = (
         ('Login Details', {
             "fields": ["title", "user", "categories", "status",
@@ -41,6 +27,14 @@ class CustomBlogPostAdmin(BlogPostAdmin):
             "classes": ("collapse-closed",)
         }),
     )
+
+    def get_form(self, *args, **kwargs):
+        form = super(CustomBlogPostAdmin, self).get_form(*args, **kwargs)
+        form.base_fields['user'].choices = (
+            [(u'', u'---------')] +
+            [(u.pk, u) for u in User.objects.filter(
+                is_author=True).iterator()])
+        return form
 
 
 admin.site.unregister(BlogPost)
