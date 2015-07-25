@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
 ######################
@@ -376,6 +377,7 @@ DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
 RICHTEXT_WIDGET_CLASS = 'customizations.widgets.CustomCKEditorWidget'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_SOURCE = STATIC_URL + 'js/ckeditor/ckeditor.js'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
 
 CKEDITOR_CONFIGS = {
     'default': {
