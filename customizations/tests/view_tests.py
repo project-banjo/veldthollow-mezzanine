@@ -61,7 +61,8 @@ class HomepageTest(TestCase):
     def setUp(self):
         self.view = views.HomepageView()
         self.post_recipe = recipe.Recipe(
-            'blog.BlogPost', status=CONTENT_STATUS_PUBLISHED, expiry_date=None)
+            'blog.BlogPost', status=CONTENT_STATUS_PUBLISHED, expiry_date=None,
+            site__id=1)
         self.maxDiff = None
 
     def test_get_context_data(self):
