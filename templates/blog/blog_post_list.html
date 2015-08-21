@@ -8,17 +8,13 @@
     <div class="row">
         <div class="col-md-12">
             <h1>
-                {% if tag or category or year or month or author %}
+                {% if tag or category %}
                 {% block blog_post_list_filterinfo %}
                 {% if tag %}
                     {% trans "Viewing posts tagged" %} {{ tag }}
                 {% else %}{% if category %}
                     {{ category }}
-                {% else %}{% if year or month %}
-                    {% trans "Viewing posts from" %} {% if month %}{{ month }}, {% endif %} {{ year }}
-                {% else %}{% if author %}
-                    {% trans "Viewing posts by" %} {{ author.get_full_name|default:author.username }}
-                {% endif %}{% endif %}{% endif %}{% endif %}
+                {% endif %}{% endif %}
                 {% endblock %}
                 {% endif %}
             </h1>

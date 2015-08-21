@@ -62,7 +62,8 @@ class CustomUserAdmin(SitePermissionUserAdmin):
     form = CustomUserChangeForm
     fieldsets = (
         ('Personal Info', {
-            'fields': ('first_name', 'last_name', 'email', 'profile_image'),
+            'fields': ('first_name', 'last_name', 'email', 'profile_image',
+                       'contact_email'),
         }),
         ('Author Details', {
             'fields': ('is_author', 'short_bio', 'full_bio'),

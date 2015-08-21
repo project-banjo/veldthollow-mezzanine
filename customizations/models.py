@@ -15,6 +15,7 @@ from .fields import FileBrowseImageField
 
 @python_2_unicode_compatible
 class User(AbstractUser):
+    contact_email = models.EmailField(blank=True)
     is_author = models.BooleanField('author status', default=False)
     short_bio = models.TextField(blank=True)
     full_bio = RichTextField(blank=True)

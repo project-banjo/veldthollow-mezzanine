@@ -42,6 +42,17 @@
   background-color: rgba(0,0,0,0.1);
 }
 
+.author-header {
+  padding-top: 40px;
+}
+.author-header h1 {
+  text-align: center;
+}
+.author-header .author-info h1 {
+  padding: 3% 0;
+  text-align: left;
+}
+
 /* Site */
 body {
   font-size: 18px;

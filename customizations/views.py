@@ -2,11 +2,38 @@
 from __future__ import unicode_literals
 
 from django.http import Http404
-from django.views.generic import DetailView, View
+from django.shortcuts import get_object_or_404
+from django.views.generic import DetailView, ListView, View
 from mezzanine.blog import views as blog_views
 from mezzanine.blog.models import BlogPost
 
-from customizations.models import Homepage
+from customizations.models import Homepage, User
+
+
+class AuthorArticleListView(ListView):
+    model = BlogPost
+    template_name = 'blog/author_profile.html'
+    context_object_name = 'blog_posts'
+    paginate_by = 24
+
+    def get(self, request, *args, **kwargs):
+        self.author = self.get_author()
+        return super(AuthorArticleListView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        ctx = super(AuthorArticleListView, self).get_context_data(**kwargs)
+        ctx.update(
+            author=self.author
+        )
+        return ctx
+
+    def get_author(self):
+        return get_object_or_404(
+            User, username=self.kwargs['author'], is_author=True)
+
+    def get_queryset(self):
+        qs = super(AuthorArticleListView, self).get_queryset()
+        return qs.filter(user=self.author)
 
 
 class BlogRouterView(View):

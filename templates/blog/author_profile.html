@@ -1,0 +1,53 @@
+{% overextends "blog/blog_post_list.html" %}
+{% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags %}
+
+{% block body_id %}author_article_list{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            
+            <div class="author-header row">
+                <h1 class="col-xs-12 visible-xs-block">{{ author.get_full_name|default:author.username }}</h1>
+                <div class="col-sm-3 col-xs-5"><img class="img-responsive img-circle" src="{{MEDIA_URL}}{% thumbnail author.profile_image 255 255 %}" /></div>
+                <div class="author-info col-sm-9 col-xs-7">
+                    <h1 class="hidden-xs">{{ author.get_full_name|default:author.username }}</h1>
+                    {% if author.authorlink_set.exists %}
+                    <ul class="author_links list-inline">
+                        {% for link in author.authorlink_set.all %}
+                        <li class="author_link"><a href="{{link.url}}" target="_blank"><i class="fa fa-{% if link.link_type == 'web' %}globe{% else %}{{link.link_type}}{% endif %}"></i></a></li>
+                        {% endfor %}
+                        {% if author.contact_email %}
+                        <li class="author_link"><a href="mailto:{{author.contact_email}}">Contact {{author.get_full_name}}</a></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="clearfix"></div>
+                <p class="author_bio col-xs-12">{{author.full_bio|safe}}</p>
+            </div>
+
+        </div>
+        <article class="col-md-12">
+            <div class="row">
+                <h3 class="col-xs-12">{{author.get_full_name}}'s collection on work</h3>
+                {% for article in blog_posts %}
+                <div class="post col-md-3">
+                    <figure>
+                    {% if article.featured_image %}
+                    <a href="{{ article.get_absolute_url }}">
+                        <img class="img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail article.featured_image 270 0 %}">
+                    </a>
+                    {% endif %}
+                    <h4><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
+                    </figure>
+                </div>
+                {% endfor %}
+
+                {% pagination_for paginator %}
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock %}

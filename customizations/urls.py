@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, include, url
 from django.http import HttpResponse
 
-from customizations.views import BlogRouterView
+from customizations.views import AuthorArticleListView, BlogRouterView
 from mezzanine.conf import settings
 from mezzanine.core.sitemaps import DisplayableSitemap
 
@@ -37,8 +37,9 @@ urlpatterns += patterns(
         name='blog_post_feed'),
     url('^(?P<category>.*).(?P<format>(rss|atom))$', 'blog_post_feed',
         name='blog_post_feed_category'),
-    url("^author/(?P<username>.*)/$", "blog_post_list",
-        name="blog_post_list_author"),
+    url("^author/(?P<author>.*)/$", AuthorArticleListView.as_view(),
+        name="blog_post_list_author",
+        kwargs={'template': 'blog/blog_post_list_authors.html'}),
     url(r'^(?P<slug>.*)/$', BlogRouterView.as_view()),
     url('^(?P<category>.*)/$', 'blog_post_list',
         name='blog_post_list_category'),
