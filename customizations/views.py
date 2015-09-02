@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView, View
 from mezzanine.blog import views as blog_views
 from mezzanine.blog.models import BlogPost
 
-from customizations.models import Homepage, User
+from customizations.models import User
 
 
 class AuthorArticleListView(ListView):
@@ -49,7 +49,6 @@ class BlogRouterView(View):
 
 
 class HomepageView(DetailView):
-    model = Homepage
     template_name = 'homepage.html'
     latest_article_limit = 3
     featured_article_limit = 6
@@ -57,13 +56,12 @@ class HomepageView(DetailView):
     featured_author_article_limit = 3
 
     def get_object(self, *args, **kwargs):
-        return self.get_queryset().get()
+        return self.request.page.get_content_model()
 
     def get_context_data(self, **kwargs):
         context = super(HomepageView, self).get_context_data(**kwargs)
         context['latest_articles'] = self.get_latest_articles
-        context['featured_category_articles'] = (
-            self.get_featured_category_articles)
+        context['featured_category_articles'] = self.get_featured_category_articles
         context['featured_articles'] = self.get_featured_articles
         context['featured_author_articles'] = self.get_featured_author_articles
         return context

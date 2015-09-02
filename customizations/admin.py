@@ -3,9 +3,11 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 from django.contrib.auth.forms import UserChangeForm
+from django.utils.translation import ugettext_lazy as _
 from mezzanine.blog.admin import BlogCategoryAdmin, BlogPostAdmin
 from mezzanine.core.admin import SitePermissionUserAdmin
 from mezzanine.blog.models import BlogCategory, BlogPost
+from mezzanine.pages.admin import PageAdmin
 
 from .models import User, AuthorLink, Homepage
 
@@ -85,5 +87,15 @@ class CustomUserAdmin(SitePermissionUserAdmin):
     inlines = (AuthorLinkAdmin,)
 
 
+class HomepageAdmin(PageAdmin):
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'featured_category', 'featured_author')}),
+        (_('Meta data'), {
+            'fields': ('_meta_title', 'slug'),
+            'classes': ('collapse-closed',)})
+    )
+
+
 admin.site.register(User, CustomUserAdmin)
-admin.site.register(Homepage)
+admin.site.register(Homepage, HomepageAdmin)

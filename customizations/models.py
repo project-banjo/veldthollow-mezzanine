@@ -8,6 +8,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import SmartResize
 from mezzanine.blog.models import BlogCategory
 from mezzanine.core.fields import RichTextField
+from mezzanine.pages.models import Page
 from mezzanine.utils.models import upload_to
 
 from .fields import FileBrowseImageField
@@ -49,7 +50,7 @@ class AuthorLink(models.Model):
     url = models.URLField()
 
 
-class Homepage(models.Model):
+class Homepage(Page):
     featured_category = models.ForeignKey(
         BlogCategory, blank=True, null=True)
     featured_author = models.ForeignKey(User, blank=True, null=True)

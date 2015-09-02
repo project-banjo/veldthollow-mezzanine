@@ -65,6 +65,15 @@ class HomepageTest(TestCase):
             site__id=1)
         self.maxDiff = None
 
+    @fudge.test
+    def test_get_object(self):
+        self.view.request = fudge.Fake().is_a_stub()
+        self.view.request.page.expects('get_content_model').returns('fake model')
+
+        obj = self.view.get_object()
+
+        self.assertEqual(obj, 'fake model')
+
     def test_get_context_data(self):
         context_fake = fudge.Fake().is_callable()
         context_fake.expects_call().with_args(
