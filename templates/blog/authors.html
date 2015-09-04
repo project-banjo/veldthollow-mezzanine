@@ -1,0 +1,61 @@
+{% overextends "blog/blog_post_list.html" %}
+{% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags %}
+
+{% block body_id %}author_list{% endblock %}
+
+{% block main %}
+<div class="container">
+    <article class="row">
+        <div class="col-md-12">
+            <div class="author-list-header">
+                <h1>{{request.page.title}}</h1>
+                {{request.page.get_content_model.content|safe}}
+            </div>
+            <h2>Staff Writers</h2>
+            {% for author in staff %}
+            <div class="author-header row">
+                <div class="col-md-3 col-sm-4 col-xs-5">
+                    <img class="img-responsive img-circle" src="{{MEDIA_URL}}{% thumbnail author.profile_image 290 290 %}" />
+                    <h3 class="hidden-xs text-center">{{ author.get_full_name|default:author.username }}</h3>
+                </div>
+                <h3 class="visible-xs col-xs-7">{{ author.get_full_name|default:author.username }}</h3>
+                <p class="author_bio hidden-xs">{{author.short_bio|safe}}</p>
+                {% if author.authorlink_set.exists %}
+                <ul class="author_links list-inline col-md-9 col-sm-8 col-xs-7">
+                    {% for link in author.authorlink_set.all %}
+                    <li class="author_link"><a href="{{link.url}}" target="_blank"><i class="fa fa-{% if link.link_type == 'web' %}globe{% else %}{{link.link_type}}{% endif %}"></i></a></li>
+                    {% endfor %}
+                    {% if author.contact_email %}
+                    <li class="author_link"><a href="mailto:{{author.contact_email}}">Contact {{author.get_full_name}}</a></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+                <div class="clearfix"></div>
+                <p class="author_bio visible-xs col-xs-12">{{author.short_bio|safe}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% if guests %}
+        <h2>Guest Writers</h2>
+        {% for author in guests %}
+        <div class="col-sm-6 row">
+            <img class="img-responsive img-circle col-xs-4" src="{{MEDIA_URL}}{% thumbnail author.profile_image 290 290 %}" />
+            <h3 class="col-xs-8">{{ author.get_full_name|default:author.username }}</h3>
+            {% if author.authorlink_set.exists %}
+            <ul class="author_links list-inline col-xs-8">
+                {% for link in author.authorlink_set.all %}
+                <li class="author_link"><a href="{{link.url}}" target="_blank"><i class="fa fa-{% if link.link_type == 'web' %}globe{% else %}{{link.link_type}}{% endif %}"></i></a></li>
+                {% endfor %}
+                {% if author.contact_email %}
+                <li class="author_link"><a href="mailto:{{author.contact_email}}">Contact {{author.get_full_name}}</a></li>
+                {% endif %}
+            </ul>
+            {% endif %}
+            <div class="clearfix"></div>
+            <p class="author_bio col-xs-12">{{author.short_bio|safe}}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </article>
+</div>
+{% endblock %}

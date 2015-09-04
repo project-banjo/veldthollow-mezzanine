@@ -68,7 +68,7 @@ class CustomUserAdmin(SitePermissionUserAdmin):
                        'contact_email'),
         }),
         ('Author Details', {
-            'fields': ('is_author', 'short_bio', 'full_bio'),
+            'fields': ('author_status', 'short_bio', 'full_bio'),
         }),
         ('Login Info', {
             'fields': ('username', 'password'),
@@ -83,7 +83,7 @@ class CustomUserAdmin(SitePermissionUserAdmin):
             'fields': ('last_login', 'date_joined'),
             "classes": ("collapse-closed",),
         }))
-    list_filter = SitePermissionUserAdmin.list_filter + ('is_author',)
+    list_filter = SitePermissionUserAdmin.list_filter + ('author_status',)
     inlines = (AuthorLinkAdmin,)
 
 

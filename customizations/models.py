@@ -17,7 +17,16 @@ from .fields import FileBrowseImageField
 @python_2_unicode_compatible
 class User(AbstractUser):
     contact_email = models.EmailField(blank=True)
-    is_author = models.BooleanField('author status', default=False)
+    NONAUTHOR = None
+    GUEST = 5
+    STAFF = 10
+    AUTHOR_STATUS_CHOICES = (
+        (NONAUTHOR, 'No'),
+        (GUEST, 'Guest'),
+        (STAFF, 'Staff'),
+    )
+    author_status = models.IntegerField(
+        'Author Status', choices=AUTHOR_STATUS_CHOICES, default=None, null=True)
     short_bio = models.TextField(blank=True)
     full_bio = RichTextField(blank=True)
     profile_image = FileBrowseImageField(
@@ -32,6 +41,7 @@ class User(AbstractUser):
 
     class Meta:
         db_table = 'auth_user'
+        ordering = ('first_name', 'last_name')
 
     def __str__(self):
         return self.get_full_name() or self.username

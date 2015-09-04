@@ -1,15 +1,122 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from arrow import Arrow
 from django.http import Http404
 from django.test import TestCase
+from django.views import generic
+from mezzanine.blog.models import BlogPost
 from mezzanine.core.models import (
-    CONTENT_STATUS_DRAFT, CONTENT_STATUS_PUBLISHED)
+    CONTENT_STATUS_DRAFT,
+    CONTENT_STATUS_PUBLISHED,
+)
 from model_mommy import mommy, recipe
-from arrow import Arrow
 import fudge
 
 from customizations import views
+from customizations.models import User
+
+
+class AuthorArticleListViewTest(TestCase):
+    def setUp(self):
+        self.view = views.AuthorArticleListView()
+
+    def test_attrs(self):
+        self.assertIsInstance(self.view, generic.ListView)
+        self.assertEqual(self.view.model, BlogPost)
+        self.assertEqual(self.view.template_name, 'blog/author_profile.html')
+        self.assertEqual(self.view.context_object_name, 'blog_posts')
+        self.assertEqual(self.view.paginate_by, 24)
+
+    @fudge.patch('customizations.views.ListView.get',
+                 'customizations.views.AuthorArticleListView.get_author')
+    def test_get(self, mock_get, mock_get_author):
+        request = fudge.Fake()
+        mock_author = fudge.Fake()
+        mock_get_author.expects_call().returns(mock_author)
+        mock_get.expects_call().with_args(request).returns('fake response')
+
+        resp = self.view.get(request)
+
+        self.assertEqual(resp, 'fake response')
+        self.assertEqual(self.view.author, mock_author)
+
+    @fudge.patch('customizations.views.ListView.get_context_data')
+    def test_get_context_data(self, mock_get_ctx):
+        mock_get_ctx.expects_call().returns({'fake': 'ctx'})
+        self.view.author = fudge.Fake()
+
+        ctx = self.view.get_context_data()
+
+        self.assertDictEqual(ctx, {'fake': 'ctx', 'author': self.view.author})
+
+    @fudge.patch('customizations.views.get_object_or_404')
+    def test_get_author(self, mock_get_obj):
+        mock_user = fudge.Fake()
+        self.view.kwargs = {'author': 'jimbob'}
+        mock_get_obj.expects_call().with_args(
+            User, username='jimbob', author_status__isnull=False).returns(mock_user)
+
+        author = self.view.get_author()
+
+        self.assertEqual(author, mock_user)
+
+    @fudge.patch('customizations.views.ListView.get_queryset')
+    def test_get_queryset(self, mock_get_qs):
+        self.view.author = fudge.Fake()
+        mock_qs = fudge.Fake()
+        mock_get_qs.expects_call().returns(mock_qs)
+        mock_qs.expects('filter').with_args(user=self.view.author).returns(mock_qs)
+
+        qs = self.view.get_queryset()
+
+        self.assertEqual(qs, mock_qs)
+
+
+class AuthorListViewTest(TestCase):
+    def setUp(self):
+        self.view = views.AuthorListView()
+
+    def test_attrs(self):
+        self.assertIsInstance(self.view, generic.ListView)
+        self.assertEqual(self.view.model, User)
+        self.assertEqual(self.view.template_name, 'blog/authors.html')
+
+    @fudge.patch('customizations.views.ListView.get_context_data',
+                 'customizations.views.AuthorListView.get_staff',
+                 'customizations.views.AuthorListView.get_guests')
+    def test_get_context_data(self, mock_get_ctx, mock_staff, mock_guests):
+        mock_get_ctx.expects_call().returns({'mock': 'ctx'})
+        mock_staff.expects_call().returns(['staff', 'writers'])
+        mock_guests.expects_call().returns(['guest', 'authors'])
+
+        ctx = self.view.get_context_data()
+
+        self.assertDictEqual(
+            ctx,
+            {'mock': 'ctx',
+             'staff': ['staff', 'writers'],
+             'guests': ['guest', 'authors']})
+
+    @fudge.patch('customizations.views.AuthorListView.get_queryset')
+    def test_get_staff(self, mock_get_qs):
+        mock_qs = fudge.Fake()
+        (mock_get_qs.expects_call().returns_fake()
+         .expects('filter').with_args(author_status=User.STAFF).returns(mock_qs))
+
+        qs = self.view.get_staff()
+
+        self.assertEqual(qs, mock_qs)
+
+    @fudge.patch('customizations.views.AuthorListView.get_queryset')
+    def test_get_guests(self, mock_get_qs):
+        mock_qs = fudge.Fake()
+        (mock_get_qs.expects_call().returns_fake()
+         .expects('filter').with_args(author_status=User.GUEST).returns(mock_qs))
+
+        qs = self.view.get_guests()
+
+        self.assertEqual(qs, mock_qs)
 
 
 class BlogRouterViewTest(TestCase):
@@ -141,7 +248,7 @@ class HomepageTest(TestCase):
 
     def test_get_featured_author(self):
         author1, author2 = mommy.make(
-            'customizations.User', is_author=True, _quantity=2)
+            'customizations.User', author_status=User.STAFF, _quantity=2)
         self.view.object = mommy.make(
             'customizations.Homepage', featured_author=author1)
         post1, post2, post3 = self.post_recipe.make(

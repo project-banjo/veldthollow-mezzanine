@@ -22,18 +22,33 @@ class AuthorArticleListView(ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super(AuthorArticleListView, self).get_context_data(**kwargs)
-        ctx.update(
-            author=self.author
-        )
+        ctx['author'] = self.author
         return ctx
 
     def get_author(self):
         return get_object_or_404(
-            User, username=self.kwargs['author'], is_author=True)
+            User, username=self.kwargs['author'], author_status__isnull=False)
 
     def get_queryset(self):
         qs = super(AuthorArticleListView, self).get_queryset()
         return qs.filter(user=self.author)
+
+
+class AuthorListView(ListView):
+    model = User
+    template_name = 'blog/authors.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(AuthorListView, self).get_context_data(**kwargs)
+        ctx['staff'] = self.get_staff()
+        ctx['guests'] = self.get_guests()
+        return ctx
+
+    def get_staff(self):
+        return self.get_queryset().filter(author_status=User.STAFF)
+
+    def get_guests(self):
+        return self.get_queryset().filter(author_status=User.GUEST)
 
 
 class BlogRouterView(View):
