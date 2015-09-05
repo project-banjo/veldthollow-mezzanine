@@ -1,0 +1,59 @@
+{% overextends "pages/page.html" %}
+
+{% load mezzanine_tags i18n %}
+
+{% block main %}
+<div class="container">
+    <article class="row">
+{{ block.super }}
+{% if request.GET.sent %}
+<div class="col-xs-12">
+    {% editable page.form.response %}
+    <h1>{{page.title}}</h1>
+    {{ page.form.response|richtext_filters|safe }}
+    {% endeditable %}
+</div>
+{% else %}
+<div class="col-xs-12">
+    {% with page.form as page_form %}
+    {% editable page_form.title page_form.content %}
+    <h1>{{page_form.title}}</h1>
+    {{ page_form.content|richtext_filters|safe }}
+    {% endeditable %}
+    {% endwith %}
+</div>
+<div class="col-sm-8 col-sm-offset-2">
+    {% errors_for form %}
+
+    <form class="form-horizontal" method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+        {% for field in form %}
+            <div class="form-group row{% if field.errors %} has-error has-feedback{% endif %}">
+                {% for error in field.errors %}<div class="alert alert-danger" role="alert">{{error}}</div>{% endfor %}
+                <label for="{{field.id_for_label}}" class="col-sm-2 control-label">{{field.label}}</label>
+                <div class="col-sm-10">
+                    {{field}}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="form-group row">
+            <div class="col-sm-4 col-sm-offset-4">
+            <input class="btn btn-primary btn-block" type="submit"
+                value="{% if page.form.button_text %}{{ page.form.button_text }}{% else %}{% trans "Submit" %}{% endif %}">
+            </div>
+            {% csrf_token %}
+        </div>
+    </form>
+{% endif %}
+
+        </div>
+    </article>
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+$(function() {$('.mezzanine-form :input:visible:enabled:first').focus();});
+</script>
+{% endblock %}

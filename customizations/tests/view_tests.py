@@ -123,19 +123,18 @@ class BlogRouterViewTest(TestCase):
     def setUp(self):
         self.view = views.BlogRouterView()
 
-    def test_get_category(self):
+    def test_dispatch_category(self):
         request = fudge.Fake()
         mock_blog_views = fudge.Fake().is_a_stub()
         mock_blog_views.blog_post_list.expects_call().with_args(
             request, category='this_slug').returns('category response')
 
-        with fudge.patcher.patched_context(
-                views, 'blog_views', mock_blog_views):
-            resp = self.view.get(request, slug='this_slug')
+        with fudge.patcher.patched_context(views, 'blog_views', mock_blog_views):
+            resp = self.view.dispatch(request, slug='this_slug')
 
         self.assertEqual(resp, 'category response')
 
-    def test_get_post(self):
+    def test_dispatch_post(self):
         request = fudge.Fake()
         mock_blog_views = fudge.Fake().is_a_stub()
         mock_blog_views.blog_post_list.expects_call().with_args(
@@ -143,14 +142,12 @@ class BlogRouterViewTest(TestCase):
         mock_blog_views.blog_post_detail.expects_call().with_args(
             request, slug='this_slug').returns('slug response')
 
-        with fudge.patcher.patched_context(
-                views, 'blog_views', mock_blog_views):
-            resp = self.view.get(request, slug='this_slug')
+        with fudge.patcher.patched_context(views, 'blog_views', mock_blog_views):
+            resp = self.view.dispatch(request, slug='this_slug')
 
         self.assertEqual(resp, 'slug response')
 
-    def test_get_404(self):
-        pass
+    def test_dispatch_404(self):
         request = fudge.Fake()
         mock_blog_views = fudge.Fake().is_a_stub()
         mock_blog_views.blog_post_list.expects_call().with_args(
@@ -158,10 +155,8 @@ class BlogRouterViewTest(TestCase):
         mock_blog_views.blog_post_detail.expects_call().with_args(
             request, slug='this_slug').raises(Http404)
 
-        with fudge.patcher.patched_context(
-                views, 'blog_views', mock_blog_views):
-            self.assertRaises(
-                Http404, self.view.get, request, slug='this_slug')
+        with fudge.patcher.patched_context(views, 'blog_views', mock_blog_views):
+            self.assertRaises(Http404, self.view.dispatch, request, slug='this_slug')
 
 
 class HomepageTest(TestCase):

@@ -52,7 +52,9 @@ class AuthorListView(ListView):
 
 
 class BlogRouterView(View):
-    def get(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
+        # since this is effectively a proxy we don't want to limit which
+        # methods are used, thus `dispatch` instead of `get`
         slug = kwargs.pop('slug')
         try:
             response = blog_views.blog_post_list(
