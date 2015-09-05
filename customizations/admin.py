@@ -96,6 +96,18 @@ class HomepageAdmin(PageAdmin):
             'classes': ('collapse-closed',)})
     )
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def get_urls(self):
+        urls = super(HomepageAdmin, self).get_urls()
+        return [u for u in urls
+                if not u.name.endswith('_add') and
+                not u.name.endswith('_delete')]
+
 
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Homepage, HomepageAdmin)
