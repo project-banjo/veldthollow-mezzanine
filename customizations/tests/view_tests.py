@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from arrow import Arrow
 from django.http import Http404
 from django.test import TestCase

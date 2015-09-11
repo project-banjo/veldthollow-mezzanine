@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from ckeditor.widgets import CKEditorWidget
 from django.conf import settings
 from django.forms.fields import Field

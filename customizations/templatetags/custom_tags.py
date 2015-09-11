@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.db.models import Count
 from mezzanine.blog.models import BlogPost
 from mezzanine.generic.models import Keyword

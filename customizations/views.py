@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView, View
@@ -18,10 +15,10 @@ class AuthorArticleListView(ListView):
 
     def get(self, request, *args, **kwargs):
         self.author = self.get_author()
-        return super(AuthorArticleListView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        ctx = super(AuthorArticleListView, self).get_context_data(**kwargs)
+        ctx = super().get_context_data(**kwargs)
         ctx['author'] = self.author
         return ctx
 
@@ -30,7 +27,7 @@ class AuthorArticleListView(ListView):
             User, username=self.kwargs['author'], author_status__isnull=False)
 
     def get_queryset(self):
-        qs = super(AuthorArticleListView, self).get_queryset()
+        qs = super().get_queryset()
         return qs.filter(user=self.author)
 
 
@@ -39,7 +36,7 @@ class AuthorListView(ListView):
     template_name = 'blog/authors.html'
 
     def get_context_data(self, **kwargs):
-        ctx = super(AuthorListView, self).get_context_data(**kwargs)
+        ctx = super().get_context_data(**kwargs)
         ctx['staff'] = self.get_staff()
         ctx['guests'] = self.get_guests()
         return ctx
@@ -76,7 +73,7 @@ class HomepageView(DetailView):
         return self.request.page.get_content_model()
 
     def get_context_data(self, **kwargs):
-        context = super(HomepageView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['latest_articles'] = self.get_latest_articles
         context['featured_category_articles'] = self.get_featured_category_articles
         context['featured_articles'] = self.get_featured_articles

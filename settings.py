@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
-
 ######################
 # MEZZANINE SETTINGS #
 ######################
@@ -323,7 +320,7 @@ PACKAGE_NAME_GRAPPELLI = "grappelli_safe"
 AUTH_USER_MODEL = 'customizations.User'
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = ('--nocapture', '--nologcapture', '--with-progressive',)
+NOSE_ARGS = ('--nocapture', '--nologcapture',)
 
 try:
     from model_mommy import generators

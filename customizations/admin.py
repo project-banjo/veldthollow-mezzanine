@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.contrib import admin
 from django.contrib.auth.forms import UserChangeForm
 from django.utils.translation import ugettext_lazy as _
@@ -31,7 +28,7 @@ class CustomBlogPostAdmin(BlogPostAdmin):
     )
 
     def get_form(self, *args, **kwargs):
-        form = super(CustomBlogPostAdmin, self).get_form(*args, **kwargs)
+        form = super().get_form(*args, **kwargs)
         form.base_fields['user'].choices = (
             [(u'', u'---------')] +
             [(u.pk, u) for u in User.objects.filter(
@@ -103,7 +100,7 @@ class HomepageAdmin(PageAdmin):
         return False
 
     def get_urls(self):
-        urls = super(HomepageAdmin, self).get_urls()
+        urls = super().get_urls()
         return [u for u in urls
                 if not u.name.endswith('_add') and
                 not u.name.endswith('_delete')]

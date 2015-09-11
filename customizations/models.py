@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from imagekit.models import ImageSpecField
 from imagekit.processors import SmartResize
 from mezzanine.blog.models import BlogCategory
@@ -14,7 +10,6 @@ from mezzanine.utils.models import upload_to
 from .fields import FileBrowseImageField
 
 
-@python_2_unicode_compatible
 class User(AbstractUser):
     contact_email = models.EmailField(blank=True)
     NONAUTHOR = None

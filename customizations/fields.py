@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from django.core.files.storage import default_storage
 from django.db import models
 from django.utils.six import with_metaclass
@@ -25,9 +23,9 @@ class FileBrowseImageField(with_metaclass(models.SubfieldBase, FileField)):
 
     def __init__(self, file_obj_name='image_file', *args, **kwargs):
         self.storage = kwargs.pop('storage', None) or default_storage
-        super(FileBrowseImageField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.file_obj_name = file_obj_name
 
     def contribute_to_class(self, cls, name):
-        super(FileBrowseImageField, self).contribute_to_class(cls, name)
+        super().contribute_to_class(cls, name)
         setattr(cls, self.file_obj_name, self.ProxyFile(self))
