@@ -271,7 +271,6 @@ INSTALLED_APPS = (
 
     'customizations',
     'ckeditor',
-    'django_nose',
 )
 
 # List of processors used by RequestContext to populate the context.
@@ -326,10 +325,14 @@ AUTH_USER_MODEL = 'customizations.User'
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ('--nocapture', '--nologcapture', '--with-progressive',)
 
-from model_mommy import generators
-MOMMY_CUSTOM_FIELDS_GEN = {
-    'mezzanine.core.fields.RichTextField': generators.gen_text,
-}
+try:
+    from model_mommy import generators
+except ImportError:
+    pass
+else:
+    MOMMY_CUSTOM_FIELDS_GEN = {
+        'mezzanine.core.fields.RichTextField': generators.gen_text,
+    }
 
 
 # LOGGING
