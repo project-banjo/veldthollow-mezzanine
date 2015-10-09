@@ -26,13 +26,14 @@ class CustomBlogPostAdmin(BlogPostAdmin):
             "classes": ("collapse-closed",)
         }),
     )
+    list_display = BlogPostAdmin.list_display
 
     def get_form(self, *args, **kwargs):
         form = super().get_form(*args, **kwargs)
         form.base_fields['user'].choices = (
             [(u'', u'---------')] +
-            [(u.pk, u) for u in User.objects.filter(
-                is_author=True).iterator()])
+            [(u.pk, u) for u in User.objects.exclude(
+                author_status=User.NONAUTHOR).iterator()])
         return form
 
 
