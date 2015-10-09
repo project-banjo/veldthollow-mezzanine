@@ -134,7 +134,11 @@ body > footer ul {
 #page_blog_list h1 {
   text-align: center;
 }
+#page_blog_list article {
+  min-width: 1px;
+}
 #page_blog_list .post {
+  min-width: 1px;
   text-align: center;
 }
 
@@ -157,7 +161,7 @@ body > footer ul {
 }
 #homepage .article-group h2 {
   text-align: center;
-  margin: 0 0 20px;
+  padding: 0 0 20px;
   vertical-align: middle;
 }
 #homepage .article-group h2 small {
@@ -167,8 +171,9 @@ body > footer ul {
 #homepage .article-group:nth-child(even) {
   background-color: rgba(0,0,0,0.3);
 }
-#homepage .article-summary img {
-  width: 100%;
+#homepage .article-summary {
+  display: block;
+  min-width: 1px;
 }
 #homepage .article-summary .preview-blurb {
   font-size: 2em;
@@ -176,6 +181,9 @@ body > footer ul {
   height: 330px;
   display: flex;
   align-items: center;
+}
+#homepage #latest-stories>div {
+  min-width: 1px;
 }
 #homepage #latest-stories .article-summary {
   position: relative;
@@ -189,7 +197,6 @@ body > footer ul {
   padding: 0 20px;
   transition: bottom 0.5s ease-out;
   width: 100%;
-  width: calc(100% - 30px);
 }
 #homepage #latest-stories .article-summary .details .blurb {
   height: 5.7em;
@@ -212,13 +219,17 @@ body > footer ul {
 #homepage #latest-stories .article-summary .author {
   color: #787878;
 }
-#homepage #featured-author .author img {
-  width: 100%;
-  border-radius: 50%;
+#homepage #featured-author .author {
+  min-width: 1px;
 }
 #homepage .load-more {
   margin: 30px auto;
   padding: 10px;
   width: 100%;
+}
+@media (min-width: 34em) and (max-width: 48em) {
+  #latest-stories {
+    font-size: 0.7em;
+  }
 }
 

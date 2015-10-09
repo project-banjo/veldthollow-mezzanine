@@ -1,0 +1,17 @@
+{% load mezzanine_tags %}
+<a class="article-summary" href="{{article.get_absolute_url}}">
+    {% if is_large %}
+    <img class="img-responsive" src="{{MEDIA_URL}}{% thumbnail article.featured_image 705 640 %}" />
+    {% else %}
+    <img class="img-responsive" src="{{MEDIA_URL}}{% thumbnail article.featured_image 705 310 %}" />
+    {% endif %}
+    <div class="details">
+        <h3>{{article.title}}</h3>
+        <div class="blurb">{{article.blurb}}</div>
+        <div class="byline">
+            <span class="category">{{article.category_list.0}}</span>
+            <span class="author">by {{article.user.get_full_name}}</span>
+        </div>
+    </div>
+</a>
+

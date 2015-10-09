@@ -26,7 +26,7 @@
                         <div class="post col-md-12">
                             {% if article.featured_image %}
                             <a href="{{ article.get_absolute_url }}">
-                                <img class="img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail article.featured_image 850 380 %}">
+                                <img class="img-responsive img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail article.featured_image 850 380 %}">
                             </a>
                             {% endif %}
                             <h2><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
@@ -36,7 +36,7 @@
                         <div class="post col-md-6">
                             {% if article.featured_image %}
                             <a href="{{ article.get_absolute_url }}">
-                                <img class="img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail article.featured_image 400 180 %}">
+                                <img class="img-responsive img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail article.featured_image 400 180 %}">
                             </a>
                             {% endif %}
                             <h4><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h4>
@@ -45,6 +45,7 @@
                     {% endif %}
                 {% endfor %}
 
+                <div class="clearfix"></div>
                 {% pagination_for blog_posts %}
             </div>
         </article>
