@@ -7,6 +7,7 @@ module.exports = (grunt) ->
                     compress: false
                 files:
                     'tmp/main.css': 'customizations/media/styles/**/*.styl'
+                    'tmp/splash.css': 'customizations/media/styles/splash/*.styl'
         #coffee:
         #    compile:
         #        files:
@@ -23,6 +24,9 @@ module.exports = (grunt) ->
                 files:
                     'customizations/static/css/main.css': [
                         'tmp/main.css'
+                    ]
+                    'customizations/static/css/splash.css': [
+                        'tmp/splash.css'
                     ]
         watch:
             #coffee:

@@ -18,8 +18,8 @@ urlpatterns = i18n_patterns(
 
 urlpatterns += patterns(
     '',
-    # url(r"^$", direct_to_template, {"template": "index.html"}, name="home"),
-    url(r'^$', HomepageView.as_view(), name='home'),
+    url(r"^$", direct_to_template, {"template": "splash.html"}, name="home"),
+    # url(r'^$', HomepageView.as_view(), name='home'),
     url(r'^ckeditor/', include('ckeditor.urls')),
 
     # ADD YOUR OWN URLPATTERNS *ABOVE* THE LINE BELOW.
