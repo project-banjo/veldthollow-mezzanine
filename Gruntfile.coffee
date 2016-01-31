@@ -6,18 +6,18 @@ module.exports = (grunt) ->
                 options:
                     compress: false
                 files:
-                    'tmp/main.css': 'veldthollow/media/styles/**/*.styl'
-                    'tmp/splash.css': 'veldthollow/media/styles/splash/*.styl'
+                    'tmp/main.css': 'veldthollow/media/styles/main/**/*.styl'
+                    'tmp/splash.css': 'veldthollow/media/styles/splash/**/*.styl'
         #coffee:
         #    compile:
         #        files:
-        #            'tmp/podcast_client.js': 'scripts/**/*.coffee'
+        #            'tmp/main.js': 'scripts/**/*.coffee'
         uglify:
             scripts:
                 files:
                     'veldthollow/static/js/main.js': [
                         'scripts/vendor/bootstrap.min.js'
-                        #'tmp/podcast_client.js'
+                        #'tmp/main.js'
                     ]
         concat:
             styles:
