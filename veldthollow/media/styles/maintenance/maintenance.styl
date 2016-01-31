@@ -11,22 +11,35 @@ body
     flex-flow: column nowrap
     justify-content: space-between
     align-items: stretch
-
-article
-    font-size: 4em
-    text-align: center
-    display: flex
-    justify-content: center
-    align-items: center
-    height: 100%
     background: center center/cover url("../img/splash/splashbg_xl.png")
     @media (max-width: 62em)
         &
             background: center center/cover url("../img/splash/splashbg_md.png")
+
+header
+    text-align: center
+    font-family: 'Raleway', sans-serif;
+    font-size: 3em
+    padding: 1rem
+    color: rgb(110, 110, 46)
+
     h1
         margin: 0 .5em
-        font-family: 'Raleway', sans-serif;
-        color: rgb(110, 110, 46)
+
+    .logo
+        height: 1em
+        vertical-align: top
+
+article
+    font-family: 'Raleway', sans-serif;
+    color: rgb(110, 110, 46)
+    text-align: center
+
+    h2
+        font-size: 2.5em
+
+    h3
+        font-size: 2em
 
 footer
     padding: 1.5em 0

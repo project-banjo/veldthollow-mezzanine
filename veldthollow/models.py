@@ -3,21 +3,11 @@ from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import SmartResize
 from mezzanine.blog.models import BlogCategory
-from mezzanine.conf import register_setting
 from mezzanine.core.fields import RichTextField
 from mezzanine.pages.models import Page
 from mezzanine.utils.models import upload_to
 
 from .fields import FileBrowseImageField
-
-
-register_setting(
-    name='SITE_MAINTENENCE',
-    label='Place site in maintenence mode',
-    editable=True,
-    choices=(('live', 'Live'), ('splash', 'Splash'), ('maintenence', 'Maintenence')),
-    default='live',
-)
 
 
 class User(AbstractUser):

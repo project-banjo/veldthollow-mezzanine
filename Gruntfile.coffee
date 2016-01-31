@@ -8,6 +8,7 @@ module.exports = (grunt) ->
                 files:
                     'tmp/main.css': 'veldthollow/media/styles/main/**/*.styl'
                     'tmp/splash.css': 'veldthollow/media/styles/splash/**/*.styl'
+                    'tmp/maintenance.css': 'veldthollow/media/styles/maintenance/**/*.styl'
         #coffee:
         #    compile:
         #        files:
@@ -27,6 +28,9 @@ module.exports = (grunt) ->
                     ]
                     'veldthollow/static/css/splash.css': [
                         'tmp/splash.css'
+                    ]
+                    'veldthollow/static/css/maintenance.css': [
+                        'tmp/maintenance.css'
                     ]
         watch:
             #coffee:

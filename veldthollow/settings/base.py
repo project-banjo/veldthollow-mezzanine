@@ -284,6 +284,8 @@ INSTALLED_APPS = (
 # these middleware classes will be applied in the order given, and in the
 # response phase the middleware will be applied in reverse order.
 MIDDLEWARE_CLASSES = (
+    'veldthollow.middleware.MaintenanceMiddleware',
+
     "mezzanine.core.middleware.UpdateCacheMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -423,6 +425,11 @@ CKEDITOR_CONFIGS = {
             'div[class="submit-row"] input, a[class="deleteLink"]'),
     }
 }
+
+SITE_MAINTENANCE_ACCESSIBLE = [
+    r'^/admin/',
+    r'^/ckeditor/',
+]
 
 ####################
 # DYNAMIC SETTINGS #

@@ -7,14 +7,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block meta_title %}{{ settings.SITE_TITLE }}{% endblock %}</title>
         <link rel='shortcut icon' href='{% static "img/favicon.png" %}' type='image/x-icon'/ >
-        <link rel="stylesheet" href="{% static "css/splash.css" %}">
+        <link rel="stylesheet" href="{% static "css/maintenance.css" %}">
     </head>
-    <body id="splash">
+    <body id="maintenance">
+        <header>
+            <h1><img src="{% static "img/splash/logo.png" %}" class="logo" /> Veldt Hollow</h1>
+        </header>
         <article>
-            <div>
-                <img src="{% static "img/splash/logo.png" %}" />
-                <h1>Veldt Hollow</h1>
-            </div>
+            <h2>Sorry. We're currently doing some maintenance.</h2>
+            <h3>This shouldn't take long. Go grab a drink and check back later.</h3>
         </article>
         <footer class="container">
             <div class="row">
@@ -28,4 +29,5 @@
         {% endcompress %}
     </body>
 </html>
+
 

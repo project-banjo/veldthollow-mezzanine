@@ -3,8 +3,6 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView, View
 from mezzanine.blog import views as blog_views
 from mezzanine.blog.models import BlogPost
-from mezzanine.conf import settings
-from mezzanine.core.views import direct_to_template
 
 from .models import User
 
@@ -70,11 +68,6 @@ class HomepageView(DetailView):
     featured_article_limit = 6
     featured_category_article_limit = 3
     featured_author_article_limit = 3
-
-    def dispatch(self, request, *args, **kwargs):
-        if settings.SITE_MAINTENENCE == 'splash':
-            return direct_to_template(request, template='splash.html')
-        return super().dispatch(request, *args, **kwargs)
 
     def get_object(self, *args, **kwargs):
         return self.request.page.get_content_model()
