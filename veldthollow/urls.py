@@ -4,7 +4,6 @@ from django.contrib import admin
 from django.http import HttpResponse
 
 from mezzanine.conf import settings
-from mezzanine.core.views import direct_to_template
 from mezzanine.core.sitemaps import DisplayableSitemap
 
 from .views import (
@@ -20,12 +19,11 @@ urlpatterns = i18n_patterns(
     "",
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
-    ("^admin/", include(admin.site.urls)),
+    url("^admin/", include(admin.site.urls)),
 )
 
 urlpatterns += patterns(
     '',
-    # url(r"^$", direct_to_template, {"template": "splash.html"}, name="home"),
     url(r'^$', HomepageView.as_view(), name='home'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
