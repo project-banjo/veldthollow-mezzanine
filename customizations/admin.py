@@ -103,8 +103,8 @@ class HomepageAdmin(PageAdmin):
     def get_urls(self):
         urls = super().get_urls()
         return [u for u in urls
-                if not u.name.endswith('_add') and
-                not u.name.endswith('_delete')]
+                if not u.name or (not u.name.endswith('_add') and
+                not u.name.endswith('_delete'))]
 
 
 admin.site.register(User, CustomUserAdmin)

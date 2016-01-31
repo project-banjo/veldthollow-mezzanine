@@ -143,17 +143,6 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = False
 
-# Tuple of IP addresses, as strings, that:
-#   * See debug comments, when DEBUG is true
-#   * Receive x-headers
-INTERNAL_IPS = ("127.0.0.1",)
-
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-)
-
 AUTHENTICATION_BACKENDS = ("mezzanine.core.auth_backends.MezzanineBackend",)
 
 # List of finder classes that know how to find static files in
@@ -190,7 +179,7 @@ DATABASES = {
 }
 
 MIGRATION_MODULES = {
-    'blog': 'veldthollow-mezzanine.mezzanine_migrations.blog_migrations',
+    'blog': 'mezzanine_migrations.blog_migrations',
 }
 
 #########
@@ -200,15 +189,14 @@ MIGRATION_MODULES = {
 import os
 
 # Full filesystem path to the project.
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-# Name of the directory for the project.
-PROJECT_DIRNAME = PROJECT_ROOT.split(os.sep)[-1]
+PROJECT_APP_PATH = os.path.dirname(os.path.abspath(__file__))
+PROJECT_APP = os.path.basename(PROJECT_APP_PATH)
+PROJECT_ROOT = BASE_DIR = os.path.dirname(PROJECT_APP_PATH)
 
 # Every cache key will get prefixed with this value - here we set it to
 # the name of the directory the project is in to try and use something
 # project specific.
-CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_DIRNAME
+CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_APP
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -230,13 +218,35 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 
 # Package/module name to import the root urlpatterns from for the project.
-ROOT_URLCONF = "%s.urls" % PROJECT_DIRNAME
+ROOT_URLCONF = "%s.urls" % PROJECT_APP
 
-# Put strings here, like "/home/html/django_templates"
-# or "C:/www/django/templates".
-# Always use forward slashes, even on Windows.
-# Don't forget to use absolute paths, not relative paths.
-TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(PROJECT_ROOT, "templates")
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.static",
+                "django.template.context_processors.media",
+                "django.template.context_processors.request",
+                "django.template.context_processors.tz",
+                "mezzanine.conf.context_processors.settings",
+                "mezzanine.pages.context_processors.page",
+                "customizations.context_processors.categories",
+            ],
+            "builtins": [
+                "mezzanine.template.loader_tags",
+            ],
+        },
+    },
+]
 
 BLOG_SLUG = ""
 PAGES_SLUG = ""
@@ -270,34 +280,20 @@ INSTALLED_APPS = (
     'ckeditor',
 )
 
-# List of processors used by RequestContext to populate the context.
-# Each one should be a callable that takes the request object as its
-# only parameter and returns a dictionary to add to the context.
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.contrib.messages.context_processors.messages",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.static",
-    "django.core.context_processors.media",
-    "django.core.context_processors.request",
-    "django.core.context_processors.tz",
-    "mezzanine.conf.context_processors.settings",
-    "mezzanine.pages.context_processors.page",
-    "customizations.context_processors.categories",
-)
-
 # List of middleware classes to use. Order is important; in the request phase,
 # these middleware classes will be applied in the order given, and in the
 # response phase the middleware will be applied in reverse order.
 MIDDLEWARE_CLASSES = (
     "mezzanine.core.middleware.UpdateCacheMiddleware",
+
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     "mezzanine.core.request.CurrentRequestMiddleware",
     "mezzanine.core.middleware.RedirectFallbackMiddleware",
     "mezzanine.core.middleware.TemplateForDeviceMiddleware",
@@ -307,7 +303,7 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the following if using any of the SSL settings:
     # "mezzanine.core.middleware.SSLRedirectMiddleware",
     "mezzanine.pages.middleware.PageMiddleware",
-    "mezzanine.core.middleware.UpdateCacheMiddleware",
+    "mezzanine.core.middleware.FetchFromCacheMiddleware",
 )
 
 FORMS_USE_HTML5 = True
@@ -436,11 +432,15 @@ CKEDITOR_CONFIGS = {
 # Allow any settings to be defined in local_settings.py which should be
 # ignored in your version control system allowing for settings to be
 # defined per machine.
-try:
-    from local_settings import *  # noqa
-except ImportError as e:
-        if "local_settings" not in str(e):
-                    raise e
+f = os.path.join(PROJECT_APP_PATH, "local_settings.py")
+if os.path.exists(f):
+    import sys
+    import imp
+    module_name = "%s.local_settings" % PROJECT_APP
+    module = imp.new_module(module_name)
+    module.__file__ = f
+    sys.modules[module_name] = module
+    exec(open(f, "rb").read())
 
 ####################
 # DYNAMIC SETTINGS #
