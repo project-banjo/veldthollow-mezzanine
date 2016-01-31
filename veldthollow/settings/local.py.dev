@@ -1,0 +1,16 @@
+from .base import *  #noqa
+
+DEBUG = True
+SECRET_KEY = 'thisisasecretkey'
+NEVERCACHE_KEY = "thisisasecrettoo"
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mezzanine.db',
+    }
+}
+
+for t in TEMPLATES:
+    t.setdefault('OPTIONS', {})
+    t['OPTIONS']['DEBUG'] = DEBUG

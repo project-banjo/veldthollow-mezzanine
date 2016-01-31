@@ -189,7 +189,7 @@ MIGRATION_MODULES = {
 import os
 
 # Full filesystem path to the project.
-PROJECT_APP_PATH = os.path.dirname(os.path.abspath(__file__))
+PROJECT_APP_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_APP = os.path.basename(PROJECT_APP_PATH)
 PROJECT_ROOT = BASE_DIR = os.path.dirname(PROJECT_APP_PATH)
 
@@ -423,24 +423,6 @@ CKEDITOR_CONFIGS = {
             'div[class="submit-row"] input, a[class="deleteLink"]'),
     }
 }
-
-
-##################
-# LOCAL SETTINGS #
-##################
-
-# Allow any settings to be defined in local_settings.py which should be
-# ignored in your version control system allowing for settings to be
-# defined per machine.
-f = os.path.join(PROJECT_APP_PATH, "local_settings.py")
-if os.path.exists(f):
-    import sys
-    import imp
-    module_name = "%s.local_settings" % PROJECT_APP
-    module = imp.new_module(module_name)
-    module.__file__ = f
-    sys.modules[module_name] = module
-    exec(open(f, "rb").read())
 
 ####################
 # DYNAMIC SETTINGS #
