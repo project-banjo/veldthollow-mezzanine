@@ -6,8 +6,8 @@ module.exports = (grunt) ->
                 options:
                     compress: false
                 files:
-                    'tmp/main.css': 'customizations/media/styles/**/*.styl'
-                    'tmp/splash.css': 'customizations/media/styles/splash/*.styl'
+                    'tmp/main.css': 'veldthollow/media/styles/**/*.styl'
+                    'tmp/splash.css': 'veldthollow/media/styles/splash/*.styl'
         #coffee:
         #    compile:
         #        files:
@@ -15,17 +15,17 @@ module.exports = (grunt) ->
         uglify:
             scripts:
                 files:
-                    'customizations/static/js/main.js': [
+                    'veldthollow/static/js/main.js': [
                         'scripts/vendor/bootstrap.min.js'
                         #'tmp/podcast_client.js'
                     ]
         concat:
             styles:
                 files:
-                    'customizations/static/css/main.css': [
+                    'veldthollow/static/css/main.css': [
                         'tmp/main.css'
                     ]
-                    'customizations/static/css/splash.css': [
+                    'veldthollow/static/css/splash.css': [
                         'tmp/splash.css'
                     ]
         watch:
@@ -33,13 +33,13 @@ module.exports = (grunt) ->
             #    files: 'scripts/**/*.coffee'
             #    tasks: ['coffee', 'uglify:scripts']
             js:
-                files: 'customizations/media/scripts/**/*.js'
+                files: 'veldthollow/media/scripts/**/*.js'
                 tasks: ['uglify:scripts']
             stylus:
-                files: 'customizations/media/styles/**/*.styl'
+                files: 'veldthollow/media/styles/**/*.styl'
                 tasks: ['stylus', 'concat:styles']
             css:
-                files: 'customizations/media/styles/**/*.css'
+                files: 'veldthollow/media/styles/**/*.css'
                 tasks: ['concat:styles']
 
     grunt.loadNpmTasks 'grunt-contrib-uglify'

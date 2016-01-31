@@ -4,7 +4,7 @@ from django.views.generic import DetailView, ListView, View
 from mezzanine.blog import views as blog_views
 from mezzanine.blog.models import BlogPost
 
-from customizations.models import User
+from .models import User
 
 
 class AuthorArticleListView(ListView):

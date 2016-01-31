@@ -15,7 +15,7 @@ ADMIN_MENU_ORDER = (
     ("Content", ("pages.Page", "blog.BlogPost", "blog.BlogCategory",
                  ("Media Library", "fb_browse"),)),
     ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
-    ("Users", ("customizations.User", "auth.Group",)),
+    ("Users", ("veldthollow.User", "auth.Group",)),
 )
 
 # A three item sequence, each containing a sequence of template tags
@@ -239,7 +239,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "mezzanine.conf.context_processors.settings",
                 "mezzanine.pages.context_processors.page",
-                "customizations.context_processors.categories",
+                "veldthollow.context_processors.categories",
             ],
             "builtins": [
                 "mezzanine.template.loader_tags",
@@ -276,8 +276,8 @@ INSTALLED_APPS = (
     "mezzanine.pages",
     "mezzanine.galleries",
 
-    'customizations',
     'ckeditor',
+    'veldthollow',
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
@@ -313,7 +313,7 @@ FORMS_USE_HTML5 = True
 PACKAGE_NAME_FILEBROWSER = "filebrowser_safe"
 PACKAGE_NAME_GRAPPELLI = "grappelli_safe"
 
-AUTH_USER_MODEL = 'customizations.User'
+AUTH_USER_MODEL = 'veldthollow.User'
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ('--nocapture', '--nologcapture',)
@@ -372,7 +372,7 @@ OPTIONAL_APPS = (
 )
 
 DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
-RICHTEXT_WIDGET_CLASS = 'customizations.widgets.CustomCKEditorWidget'
+RICHTEXT_WIDGET_CLASS = 'veldthollow.widgets.CustomCKEditorWidget'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_SOURCE = STATIC_URL + 'js/ckeditor/ckeditor.js'
 CKEDITOR_IMAGE_BACKEND = 'pillow'

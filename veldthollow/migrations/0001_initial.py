@@ -7,7 +7,7 @@ import mezzanine.core.fields
 import django.utils.timezone
 from django.conf import settings
 import django.core.validators
-import customizations.fields
+import veldthollow.fields
 
 
 class Migration(migrations.Migration):
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('is_author', models.BooleanField(default=False, verbose_name='author status')),
                 ('short_bio', models.TextField(blank=True)),
                 ('full_bio', mezzanine.core.fields.RichTextField(blank=True)),
-                ('profile_image', customizations.fields.FileBrowseImageField(max_length=255, null=True, blank=True)),
+                ('profile_image', veldthollow.fields.FileBrowseImageField(max_length=255, null=True, blank=True)),
                 ('groups', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Group', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Permission', blank=True, help_text='Specific permissions for this user.', verbose_name='user permissions')),
             ],

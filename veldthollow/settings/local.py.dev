@@ -13,4 +13,4 @@ DATABASES = {
 
 for t in TEMPLATES:
     t.setdefault('OPTIONS', {})
-    t['OPTIONS']['DEBUG'] = DEBUG
+    t['OPTIONS']['debug'] = DEBUG

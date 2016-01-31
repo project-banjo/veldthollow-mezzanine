@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('customizations', '0004_populate_initial_pages'),
+        ('veldthollow', '0004_populate_initial_pages'),
     ]
 
     operations = [

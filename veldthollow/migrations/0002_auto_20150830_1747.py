@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('pages', '0003_auto_20150527_1555'),
         ('blog', '0003_auto_20150725_1609'),
-        ('customizations', '0001_initial'),
+        ('veldthollow', '0001_initial'),
     ]
 
     operations = [

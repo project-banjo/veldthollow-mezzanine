@@ -26,7 +26,7 @@ class User(AbstractUser):
     full_bio = RichTextField(blank=True)
     profile_image = FileBrowseImageField(
         file_obj_name='profile_image_file',
-        upload_to=upload_to("customizations.User.profile_image", "profiles"),
+        upload_to=upload_to("veldthollow.User.profile_image", "profiles"),
         format="Image", max_length=255, null=True, blank=True)
     profile_thumbnail = ImageSpecField(
         source='profile_image_file', processors=[SmartResize(150, 150)],

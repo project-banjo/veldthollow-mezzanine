@@ -10,8 +10,8 @@ from mezzanine.core.models import (
 from model_mommy import mommy, recipe
 import fudge
 
-from customizations import views
-from customizations.models import User
+from veldthollow import views
+from veldthollow.models import User
 
 
 class AuthorArticleListViewTest(TestCase):
@@ -25,8 +25,8 @@ class AuthorArticleListViewTest(TestCase):
         self.assertEqual(self.view.context_object_name, 'blog_posts')
         self.assertEqual(self.view.paginate_by, 24)
 
-    @fudge.patch('customizations.views.ListView.get',
-                 'customizations.views.AuthorArticleListView.get_author')
+    @fudge.patch('veldthollow.views.ListView.get',
+                 'veldthollow.views.AuthorArticleListView.get_author')
     def test_get(self, mock_get, mock_get_author):
         request = fudge.Fake()
         mock_author = fudge.Fake()
@@ -38,7 +38,7 @@ class AuthorArticleListViewTest(TestCase):
         self.assertEqual(resp, 'fake response')
         self.assertEqual(self.view.author, mock_author)
 
-    @fudge.patch('customizations.views.ListView.get_context_data')
+    @fudge.patch('veldthollow.views.ListView.get_context_data')
     def test_get_context_data(self, mock_get_ctx):
         mock_get_ctx.expects_call().returns({'fake': 'ctx'})
         self.view.author = fudge.Fake()
@@ -47,7 +47,7 @@ class AuthorArticleListViewTest(TestCase):
 
         self.assertDictEqual(ctx, {'fake': 'ctx', 'author': self.view.author})
 
-    @fudge.patch('customizations.views.get_object_or_404')
+    @fudge.patch('veldthollow.views.get_object_or_404')
     def test_get_author(self, mock_get_obj):
         mock_user = fudge.Fake()
         self.view.kwargs = {'author': 'jimbob'}
@@ -58,7 +58,7 @@ class AuthorArticleListViewTest(TestCase):
 
         self.assertEqual(author, mock_user)
 
-    @fudge.patch('customizations.views.ListView.get_queryset')
+    @fudge.patch('veldthollow.views.ListView.get_queryset')
     def test_get_queryset(self, mock_get_qs):
         self.view.author = fudge.Fake()
         mock_qs = fudge.Fake()
@@ -79,9 +79,9 @@ class AuthorListViewTest(TestCase):
         self.assertEqual(self.view.model, User)
         self.assertEqual(self.view.template_name, 'blog/authors.html')
 
-    @fudge.patch('customizations.views.ListView.get_context_data',
-                 'customizations.views.AuthorListView.get_staff',
-                 'customizations.views.AuthorListView.get_guests')
+    @fudge.patch('veldthollow.views.ListView.get_context_data',
+                 'veldthollow.views.AuthorListView.get_staff',
+                 'veldthollow.views.AuthorListView.get_guests')
     def test_get_context_data(self, mock_get_ctx, mock_staff, mock_guests):
         mock_get_ctx.expects_call().returns({'mock': 'ctx'})
         mock_staff.expects_call().returns(['staff', 'writers'])
@@ -95,7 +95,7 @@ class AuthorListViewTest(TestCase):
              'staff': ['staff', 'writers'],
              'guests': ['guest', 'authors']})
 
-    @fudge.patch('customizations.views.AuthorListView.get_queryset')
+    @fudge.patch('veldthollow.views.AuthorListView.get_queryset')
     def test_get_staff(self, mock_get_qs):
         mock_qs = fudge.Fake()
         (mock_get_qs.expects_call().returns_fake()
@@ -105,7 +105,7 @@ class AuthorListViewTest(TestCase):
 
         self.assertEqual(qs, mock_qs)
 
-    @fudge.patch('customizations.views.AuthorListView.get_queryset')
+    @fudge.patch('veldthollow.views.AuthorListView.get_queryset')
     def test_get_guests(self, mock_get_qs):
         mock_qs = fudge.Fake()
         (mock_get_qs.expects_call().returns_fake()
@@ -211,7 +211,7 @@ class HomepageTest(TestCase):
     def test_get_featured_category_articles(self):
         category1, category2 = mommy.make('blog.BlogCategory', _quantity=2)
         self.view.object = mommy.make(
-            'customizations.Homepage', featured_category=category1)
+            'veldthollow.Homepage', featured_category=category1)
         post1, post2, post3 = self.post_recipe.make(_quantity=3)
         post4 = self.post_recipe.make(status=CONTENT_STATUS_DRAFT)
         post5, post6 = self.post_recipe.make(_quantity=2)
@@ -240,9 +240,9 @@ class HomepageTest(TestCase):
 
     def test_get_featured_author(self):
         author1, author2 = mommy.make(
-            'customizations.User', author_status=User.STAFF, _quantity=2)
+            'veldthollow.User', author_status=User.STAFF, _quantity=2)
         self.view.object = mommy.make(
-            'customizations.Homepage', featured_author=author1)
+            'veldthollow.Homepage', featured_author=author1)
         post1, post2, post3 = self.post_recipe.make(
             _quantity=3, user=author1)
         # post4

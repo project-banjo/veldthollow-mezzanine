@@ -8,7 +8,7 @@ from mezzanine.core.models import CONTENT_STATUS_PUBLISHED
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('customizations', '0003_auto_20150902_0115'),
+        ('veldthollow', '0003_auto_20150902_0115'),
         ('blog', '0003_auto_20150725_1609'),
         ('forms', '0004_auto_20150517_0510'),
 
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 slug=slug, site_id=1, defaults={'title': title})
 
     def populate_homepage(app, schema_editor):
-        Homepage = app.get_model('customizations', 'Homepage')
+        Homepage = app.get_model('veldthollow', 'Homepage')
         BlogCategory = app.get_model('blog', 'BlogCategory')
         featured_category = BlogCategory.objects.get(slug='larder-libations')
         Homepage.objects.update_or_create(
