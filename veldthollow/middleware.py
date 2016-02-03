@@ -23,11 +23,11 @@ class MaintenanceMiddleware:
 
         if settings.SITE_MAINTENANCE == 'splash':
             if request.path == '/':
-                return TemplateView.as_view(template_name='splash.html')(request)
+                return TemplateView.as_view(template_name='splash/index.html')(request)
             return RedirectView.as_view(url='/')(request)
 
         elif settings.SITE_MAINTENANCE == 'maintenance':
-            return MaintenanceView.as_view(template_name='maintenance.html')(request)
+            return MaintenanceView.as_view(template_name='maintenance/index.html')(request)
 
 
 class MaintenanceView(TemplateView):
