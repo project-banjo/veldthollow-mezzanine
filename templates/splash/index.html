@@ -10,11 +10,15 @@
         <link rel="stylesheet" href="{% static "css/splash.css" %}">
     </head>
     <body id="splash">
+        <header>
+            <img src="{% static "img/splash/logo.png" %}" class="logo"/> 
+            <h1>Veldt&shy;Hollow</h1>
+        </header>
         <article>
-            <div>
-                <img src="{% static "img/splash/logo.png" %}" />
-                <h1>Veldt Hollow</h1>
-            </div>
+            <h2>The best place to find articles that matter to "the middle."</h2>
+            {% include "splash/mailchimp.html" %}
+            <h3>We'll send you an email when our amazing content is live.</h3>
+            <h3>While you're waiting, check out our <a href="https://medium.com/veldt-hollow">sneak peak</a>.</h3>
         </article>
         <footer class="container">
             <div class="row">
