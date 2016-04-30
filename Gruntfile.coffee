@@ -6,7 +6,10 @@ module.exports = (grunt) ->
                 options:
                     compress: false
                 files:
-                    'tmp/main.css': 'veldthollow/media/styles/main/**/*.styl'
+                    'tmp/main.css': [
+                        'veldthollow/media/styles/main/base.styl',
+                        'veldthollow/media/styles/main/**/*.styl'
+                    ]
                     'tmp/splash.css': 'veldthollow/media/styles/splash/**/*.styl'
                     'tmp/maintenance.css': 'veldthollow/media/styles/maintenance/**/*.styl'
         #coffee:

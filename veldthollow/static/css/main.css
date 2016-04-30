@@ -1,61 +1,9 @@
-#article_page header {
-  text-align: center;
-}
-#article_page .categories,
-#article_page .author,
-#article_page .tags,
-#article_page .author-bio,
-#article_page .post p:not(.embed) {
-  margin-left: 80px;
-}
-#article_page .post .embed img {
-  width: 100%;
-}
-#article_page .post blockquote {
-  padding-left: 0;
-  margin-left: 120px;
-}
-#article_page .post blockquote p:not(.embed) {
-  margin-left: 20px;
-}
-#article_page .post .tags li>a:before {
-  content: '#';
-}
-#article_page .author-bio {
-  background-color: rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 20px;
-}
-#article_page .author-bio img {
-  border-radius: 50%;
-}
-#article_page .author-bio figure {
-  text-align: center;
-}
-#article_page .author-bio .bio {
-  font-size: 0.8em;
-}
-#article_page .comments {
-  background-color: rgba(0,0,0,0.1);
-}
-
-.author-header {
-  padding-top: 40px;
-}
-.author-header h1 {
-  text-align: center;
-}
-.author-header .author-info h1 {
-  padding: 3% 0;
-  text-align: left;
-}
-
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+@import url("font-awesome.min.css");
 /* Site */
 body {
   font-size: 18px;
+  font-family: Raleway, Helvetica, sans-serif;
 }
 a,
 a:visited {
@@ -129,6 +77,113 @@ body > footer .branding .copyright {
 body > footer ul {
   list-style: none;
   padding-left: 0;
+}
+/* Buttons */
+.btn-accent {
+  color: #fff;
+  background-color: #ea7124;
+  border-color: #ea7124;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 1px 1px rgba(0,0,0,0.075);
+}
+.btn-accent:hover {
+  color: #fff;
+  background-color: #de6315;
+  border-color: #d96115;
+}
+.btn-accent:focus,
+.btn-accent.focus {
+  color: #fff;
+  background-color: #de6315;
+  border-color: #d96115;
+}
+.btn-accent:active,
+.btn-accent.active,
+.open > .btn-accent.dropdown-toggle {
+  color: #fff;
+  background-color: #de6315;
+  border-color: #d96115;
+  background-image: none;
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+}
+.btn-accent:active:hover,
+.btn-accent.active:hover,
+.open > .btn-accent.dropdown-toggle:hover,
+.btn-accent:active:focus,
+.btn-accent.active:focus,
+.open > .btn-accent.dropdown-toggle:focus,
+.btn-accent:active.focus,
+.btn-accent.active.focus,
+.open > .btn-accent.dropdown-toggle.focus {
+  color: #fff;
+  background-color: #cc5c14;
+  border-color: #b95312;
+}
+.btn-accent.disabled:focus,
+.btn-accent:disabled:focus,
+.btn-accent.disabled.focus,
+.btn-accent:disabled.focus {
+  background-color: #ea7124;
+  border-color: #ea7124;
+}
+.btn-accent.disabled:hover,
+.btn-accent:disabled:hover {
+  background-color: #ea7124;
+  border-color: #ea7124;
+}
+
+#article_page header {
+  text-align: center;
+}
+#article_page .categories,
+#article_page .author,
+#article_page .tags,
+#article_page .author-bio,
+#article_page .post p:not(.embed) {
+  margin-left: 80px;
+}
+#article_page .post .embed img {
+  width: 100%;
+}
+#article_page .post blockquote {
+  padding-left: 0;
+  margin-left: 120px;
+}
+#article_page .post blockquote p:not(.embed) {
+  margin-left: 20px;
+}
+#article_page .post .tags li>a:before {
+  content: '#';
+}
+#article_page .author-bio {
+  background-color: rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+#article_page .author-bio img {
+  border-radius: 50%;
+}
+#article_page .author-bio figure {
+  text-align: center;
+}
+#article_page .author-bio .bio {
+  font-size: 0.8em;
+}
+#article_page .comments {
+  background-color: rgba(0,0,0,0.1);
+}
+
+.author-header {
+  padding-top: 40px;
+}
+.author-header h1 {
+  text-align: center;
+}
+.author-header .author-info h1 {
+  padding: 3% 0;
+  text-align: left;
 }
 
 #page_blog_list h1 {
@@ -232,4 +287,5 @@ body > footer ul {
     font-size: 0.7em;
   }
 }
+
 
