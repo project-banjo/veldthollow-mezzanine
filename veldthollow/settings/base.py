@@ -412,7 +412,13 @@ CKEDITOR_CONFIGS = {
                 'attributes': 'id'
             },
             'style script': {},
-            'input button checkbox select radio': {},
+            'input button checkbox select radio': {
+                'classes': '*'
+            },
+            'div': {
+                'classes': '*',
+                'attributes': '*'
+            },
             '*': {
                 'attributes': '*',
             },
